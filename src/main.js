@@ -146,7 +146,11 @@ if (themeToggleBtn) {
     };
 
     if (document.startViewTransition) {
-      document.startViewTransition(toggleTheme);
+      document.documentElement.classList.add('theme-transition');
+      const transition = document.startViewTransition(toggleTheme);
+      transition.finished.finally(() => {
+        document.documentElement.classList.remove('theme-transition');
+      });
     } else {
       toggleTheme();
     }

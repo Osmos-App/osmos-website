@@ -1000,12 +1000,12 @@ footer a:hover {
 }
 
 /* circular clip path transition */
-::view-transition-old(root) {
+html.theme-transition::view-transition-old(root) {
     animation: none;
     mix-blend-mode: normal;
 }
 
-::view-transition-new(root) {
+html.theme-transition::view-transition-new(root) {
     animation: clip-reveal 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     mix-blend-mode: normal;
 }
