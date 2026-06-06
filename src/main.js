@@ -92,10 +92,17 @@ if (waitlistForm) {
       const data = await response.json();
 
       if (response.ok) {
-        // Success
-        waitlistFeedback.textContent = 'Success! Welcome to the alpha. Check your inbox.';
-        waitlistFeedback.classList.add('success');
-        waitlistForm.reset();
+        // Success: Morph form to show success state using View Transitions
+        const updateUI = () => {
+          document.getElementById('waitlist-content').style.display = 'none';
+          document.getElementById('waitlist-success-view').style.display = 'block';
+        };
+
+        if (document.startViewTransition) {
+          document.startViewTransition(updateUI);
+        } else {
+          updateUI();
+        }
         
         // Log event to Analytics
         logEvent(analytics, 'waitlist_signup', {
@@ -117,6 +124,31 @@ if (waitlistForm) {
       waitlistEmail.disabled = false;
       waitlistSubmit.disabled = false;
       waitlistSubmit.innerHTML = originalBtnHTML;
+    }
+  });
+}
+
+// Theme Toggle with View Transition API Circular Ripple
+const themeToggleBtn = document.getElementById('theme-toggle');
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', function (e) {
+    // Set coordinates as CSS variables for the circular clip path
+    const x = e.clientX;
+    const y = e.clientY;
+    document.documentElement.style.setProperty('--click-x', x + 'px');
+    document.documentElement.style.setProperty('--click-y', y + 'px');
+
+    const toggleTheme = () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    };
+
+    if (document.startViewTransition) {
+      document.startViewTransition(toggleTheme);
+    } else {
+      toggleTheme();
     }
   });
 }

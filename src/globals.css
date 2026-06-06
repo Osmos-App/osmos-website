@@ -41,8 +41,17 @@
     --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@media (prefers-color-scheme:dark) {
-    :root {
+:root[data-theme="dark"] {
+    --bg: #0d0d10;
+    --surface: #18181e;
+    --primary: #7c8ff0;
+    --text: #e0e0e3;
+    --error: #e28888;
+    --border: #3f3f4e;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
         --bg: #0d0d10;
         --surface: #18181e;
         --primary: #7c8ff0;
@@ -967,4 +976,71 @@ footer a:hover {
 .waitlist-feedback.error {
     display: block;
     color: var(--error);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--rule-2);
+    border-radius: 2px;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, border-color 0.25s ease;
+    margin-right: 12px;
+}
+
+.theme-toggle:hover {
+    background: var(--wash);
+    border-color: var(--ink-2);
+}
+
+/* circular clip path transition */
+::view-transition-old(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+    animation: clip-reveal 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    mix-blend-mode: normal;
+}
+
+@keyframes clip-reveal {
+    from {
+        clip-path: circle(0% at var(--click-x, 50%) var(--click-y, 50%));
+    }
+    to {
+        clip-path: circle(150% at var(--click-x, 50%) var(--click-y, 50%));
+    }
+}
+
+/* Waitlist Form Morphing */
+.waitlist-form {
+    view-transition-name: waitlist-box;
+}
+
+.waitlist-success-view {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    padding: 8px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.waitlist-success-view h3 {
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.waitlist-success-view p {
+    font-size: 0.82rem;
+    color: var(--ink-2);
+    margin: 0;
 }

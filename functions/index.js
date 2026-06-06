@@ -117,7 +117,7 @@ const welcomeEmailTemplate = (email) => `<!DOCTYPE html>
       <p>Over the next few weeks, we will be rolling out the first invite-only alpha builds. You'll be among the first to get access to the Rust core engine and the native macOS, iOS, and Android applications.</p>
       <p>In the meantime, we'll send you a few quick emails explaining how peer-to-peer sync actually works without a central server, and how we keep your data encrypted.</p>
       <div class="btn-container">
-        <a href="https://osmos-app.web.app/#spec" class="btn">Review the Architecture Spec</a>
+        <a href="https://useosmos.com/#spec" class="btn">Review the Architecture Spec</a>
       </div>
       <p>Talk soon,<br>The Osmos Team</p>
       <div class="footer">
@@ -167,11 +167,11 @@ exports.subscribe = onRequest(
       };
 
       const info = await getTransporter().sendMail(mailOptions);
-    logger.info(`Welcome email sent successfully: ${info.messageId}`);
+      logger.info(`Welcome email sent successfully: ${info.messageId}`);
 
-    return res.status(200).json({ success: true, message: "Successfully subscribed!" });
-  } catch (error) {
-    logger.error("Error sending subscription email:", error);
-    return res.status(500).json({ success: false, message: "Failed to process subscription. Please try again later." });
-  }
-});
+      return res.status(200).json({ success: true, message: "Successfully subscribed!" });
+    } catch (error) {
+      logger.error("Error sending subscription email:", error);
+      return res.status(500).json({ success: false, message: "Failed to process subscription. Please try again later." });
+    }
+  });

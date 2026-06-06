@@ -47,6 +47,7 @@
         <a href="#roadmap">Roadmap</a>
         <a>Coming soon to GitHub</a>
       </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌓</button>
       <span class="ver"><span class="sq"></span>v0.1.0-α</span>
     </div>
   </header>
@@ -65,10 +66,16 @@
         </p>
         <div class="actions rise d4">
           <form class="waitlist-form" id="waitlist-form">
-            <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email" required />
-            <button type="submit" class="btn" id="waitlist-submit">
-              Join Alpha <span class="arr">→</span>
-            </button>
+            <div class="waitlist-content" id="waitlist-content" style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
+              <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email" required />
+              <button type="submit" class="btn" id="waitlist-submit">
+                Join Alpha <span class="arr">→</span>
+              </button>
+            </div>
+            <div class="waitlist-success-view" id="waitlist-success-view" style="display: none;">
+              <h3>Welcome to the Alpha!</h3>
+              <p>Check your inbox to get started.</p>
+            </div>
             <div class="waitlist-feedback" id="waitlist-feedback"></div>
           </form>
         </div>
