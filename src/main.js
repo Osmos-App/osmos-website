@@ -25,7 +25,10 @@ logEvent(analytics, 'app_initialized', {
 console.log("Osmos: Core system initialized successfully.");
 
 // current year
-document.getElementById('yr').textContent = new Date().getFullYear();
+const yrElement = document.getElementById('yr');
+if (yrElement) {
+  yrElement.textContent = new Date().getFullYear();
+}
 
 // copy-to-clipboard chips
 document.querySelectorAll('.chip[data-copy]').forEach(function (chip) {

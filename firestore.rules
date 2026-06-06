@@ -1,9 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // subscribers collection: only Firebase Admin SDK (server) can read/write
-    // No client-side access permitted
-    match /subscribers/{email} {
+    // Lock down all collections by default for client-side SDKs.
+    // Database writes and queries are fully managed via secure backend Cloud Functions.
+    match /{document=**} {
       allow read, write: if false;
     }
   }
