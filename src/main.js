@@ -92,6 +92,14 @@ if (waitlistForm) {
       const data = await response.json();
 
       if (response.ok) {
+        // Save registration status to localStorage
+        try {
+          localStorage.setItem('osmos_registered', 'true');
+          localStorage.setItem('osmos_registered_visits', '1');
+        } catch (e) {
+          console.warn('LocalStorage is not available:', e);
+        }
+
         // Success: Morph form to show success state using View Transitions
         const updateUI = () => {
           document.getElementById('waitlist-content').style.display = 'none';
@@ -127,6 +135,36 @@ if (waitlistForm) {
     }
   });
 }
+
+// Check registration status on load
+const checkRegistration = () => {
+  try {
+    const isRegistered = localStorage.getItem('osmos_registered') === 'true';
+    if (isRegistered) {
+      let visits = parseInt(localStorage.getItem('osmos_registered_visits') || '1', 10);
+      visits += 1;
+      localStorage.setItem('osmos_registered_visits', visits.toString());
+
+      const successView = document.getElementById('waitlist-success-view');
+      const waitlistContent = document.getElementById('waitlist-content');
+
+      if (successView && waitlistContent) {
+        if (visits > 1) {
+          successView.innerHTML = `
+            <h3>You're on the list!</h3>
+            <p>No worries, you will be notified.</p>
+          `;
+        }
+        waitlistContent.style.display = 'none';
+        successView.style.display = 'block';
+      }
+    }
+  } catch (e) {
+    console.warn('LocalStorage is not available:', e);
+  }
+};
+
+checkRegistration();
 
 // Theme Toggle with View Transition API Circular Ripple
 const themeToggleBtn = document.getElementById('theme-toggle');
