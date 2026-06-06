@@ -1032,7 +1032,7 @@ html.theme-transition::view-transition-old(root) {
 }
 
 html.theme-transition::view-transition-new(root) {
-    animation: clip-reveal 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: clip-reveal 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     mix-blend-mode: normal;
 }
 
@@ -1082,11 +1082,11 @@ html.theme-transition::view-transition-new(root) {
 }
 
 ::view-transition-old(theme-icon) {
-    animation: 0.35s cubic-bezier(0.4, 0, 0.2, 1) rotate-out;
+    animation: 0.65s cubic-bezier(0.4, 0, 0.2, 1) rotate-out;
 }
 
 ::view-transition-new(theme-icon) {
-    animation: 0.35s cubic-bezier(0.4, 0, 0.2, 1) rotate-in;
+    animation: 0.65s cubic-bezier(0.4, 0, 0.2, 1) rotate-in;
 }
 
 @keyframes rotate-out {
