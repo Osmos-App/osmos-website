@@ -912,3 +912,59 @@ footer a:hover {
         animation: none !important;
     }
 }
+
+/* ── Waitlist Form Styles ── */
+.waitlist-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.waitlist-input {
+    font-family: var(--mono);
+    font-size: .8rem;
+    background: var(--paper-2);
+    color: var(--ink);
+    border: 1px solid var(--rule-2);
+    border-radius: 2px;
+    padding: 14px 18px;
+    flex: 1;
+    min-width: 200px;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.waitlist-input:focus {
+    border-color: var(--accent);
+}
+
+.waitlist-form button {
+    border: none;
+    cursor: pointer;
+}
+
+.waitlist-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.waitlist-feedback {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    margin-top: 8px;
+    display: none;
+    width: 100%;
+}
+
+.waitlist-feedback.success {
+    display: block;
+    color: var(--accent);
+}
+
+.waitlist-feedback.error {
+    display: block;
+    color: var(--error);
+}

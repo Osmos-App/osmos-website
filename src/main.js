@@ -56,3 +56,67 @@ if (reduce || !('IntersectionObserver' in window)) {
   }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
   items.forEach(function (el) { io.observe(el); });
 }
+
+// waitlist form submission handler
+const waitlistForm = document.getElementById('waitlist-form');
+const waitlistEmail = document.getElementById('waitlist-email');
+const waitlistSubmit = document.getElementById('waitlist-submit');
+const waitlistFeedback = document.getElementById('waitlist-feedback');
+
+if (waitlistForm) {
+  waitlistForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    
+    const email = waitlistEmail.value.trim();
+    if (!email) return;
+
+    // Reset feedback
+    waitlistFeedback.className = 'waitlist-feedback';
+    waitlistFeedback.textContent = '';
+    
+    // UI state: loading
+    waitlistEmail.disabled = true;
+    waitlistSubmit.disabled = true;
+    const originalBtnHTML = waitlistSubmit.innerHTML;
+    waitlistSubmit.innerHTML = 'Sending...';
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Success
+        waitlistFeedback.textContent = 'Success! Welcome to the alpha. Check your inbox.';
+        waitlistFeedback.classList.add('success');
+        waitlistForm.reset();
+        
+        // Log event to Analytics
+        logEvent(analytics, 'waitlist_signup', {
+          email_hashed: btoa(email).substring(0, 10),
+          timestamp: new Date().toISOString()
+        });
+      } else {
+        // API Error
+        waitlistFeedback.textContent = data.message || 'Failed to join. Please try again.';
+        waitlistFeedback.classList.add('error');
+      }
+    } catch (err) {
+      // Network/System Error
+      waitlistFeedback.textContent = 'An error occurred. Please try again later.';
+      waitlistFeedback.classList.add('error');
+      console.error('Waitlist submission error:', err);
+    } finally {
+      // Re-enable inputs
+      waitlistEmail.disabled = false;
+      waitlistSubmit.disabled = false;
+      waitlistSubmit.innerHTML = originalBtnHTML;
+    }
+  });
+}

@@ -45,6 +45,10 @@
     ],
     "rewrites": [
       {
+        "source": "/api/subscribe",
+        "function": "subscribe"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
