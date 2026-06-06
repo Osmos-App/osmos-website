@@ -2,19 +2,26 @@ const { onRequest } = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const nodemailer = require("nodemailer");
 
-// Nodemailer SMTP Transport pool setup targeting smtp.gmail.com on port 465
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // true for port 465, false for other ports
-  auth: {
-    user: process.env.GOOGLE_SMTP_USER,
-    pass: process.env.GOOGLE_SMTP_APP_PASS,
-  },
-  pool: true, // Use pooled connections for better performance
-  maxConnections: 5,
-  maxMessages: 100,
-});
+// Lazy-loaded Nodemailer SMTP Transport pool
+let transporter;
+
+function getTransporter() {
+  if (!transporter) {
+    transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true for port 465, false for other ports
+      auth: {
+        user: process.env.GOOGLE_SMTP_USER,
+        pass: process.env.GOOGLE_SMTP_APP_PASS,
+      },
+      pool: true, // Use pooled connections for better performance
+      maxConnections: 5,
+      maxMessages: 100,
+    });
+  }
+  return transporter;
+}
 
 // HTML structure for Email 1: Welcome & Setup Expectations
 const welcomeEmailTemplate = (email) => `<!DOCTYPE html>
@@ -121,40 +128,45 @@ const welcomeEmailTemplate = (email) => `<!DOCTYPE html>
 </body>
 </html>`;
 
-exports.subscribe = onRequest({ cors: true }, async (req, res) => {
-  // Only allow POST requests
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ success: false, message: "Method Not Allowed" });
-  }
-
-  const { email } = req.body;
-
-  // Basic email input validation
-  if (!email || typeof email !== "string" || !email.includes("@")) {
-    return res.status(400).json({ success: false, message: "A valid email address is required." });
-  }
-
-  const subscriberEmail = email.trim().toLowerCase();
-
-  try {
-    logger.info(`Processing subscription request for: ${subscriberEmail}`);
-
-    // Verify SMTP credentials exist
-    if (!process.env.GOOGLE_SMTP_USER || !process.env.GOOGLE_SMTP_APP_PASS) {
-      logger.error("Missing Google SMTP credentials in environment variables.");
-      return res.status(500).json({ success: false, message: "Server configuration error." });
+exports.subscribe = onRequest(
+  {
+    cors: true,
+    secrets: ["GOOGLE_SMTP_USER", "GOOGLE_SMTP_APP_PASS"],
+  },
+  async (req, res) => {
+    // Only allow POST requests
+    if (req.method !== "POST") {
+      res.setHeader("Allow", "POST");
+      return res.status(405).json({ success: false, message: "Method Not Allowed" });
     }
 
-    // Send Welcome Email (Email 1) using verified domain alias hello@useosmos.com
-    const mailOptions = {
-      from: '"Osmos Team" <hello@useosmos.com>',
-      to: subscriberEmail,
-      subject: "Welcome to Osmos — Your data is officially yours",
-      html: welcomeEmailTemplate(subscriberEmail),
-    };
+    const { email } = req.body;
 
-    const info = await transporter.sendMail(mailOptions);
+    // Basic email input validation
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+      return res.status(400).json({ success: false, message: "A valid email address is required." });
+    }
+
+    const subscriberEmail = email.trim().toLowerCase();
+
+    try {
+      logger.info(`Processing subscription request for: ${subscriberEmail}`);
+
+      // Verify SMTP credentials exist in the request context (bound secrets)
+      if (!process.env.GOOGLE_SMTP_USER || !process.env.GOOGLE_SMTP_APP_PASS) {
+        logger.error("Missing Google SMTP credentials in environment variables.");
+        return res.status(500).json({ success: false, message: "Server configuration error." });
+      }
+
+      // Send Welcome Email (Email 1) using verified domain alias hello@useosmos.com
+      const mailOptions = {
+        from: '"Osmos Team" <hello@useosmos.com>',
+        to: subscriberEmail,
+        subject: "Welcome to Osmos — Your data is officially yours",
+        html: welcomeEmailTemplate(subscriberEmail),
+      };
+
+      const info = await getTransporter().sendMail(mailOptions);
     logger.info(`Welcome email sent successfully: ${info.messageId}`);
 
     return res.status(200).json({ success: true, message: "Successfully subscribed!" });
