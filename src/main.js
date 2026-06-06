@@ -99,7 +99,7 @@ if (waitlistForm) {
         
         // Log event to Analytics
         logEvent(analytics, 'waitlist_signup', {
-          email_hashed: btoa(email).substring(0, 10),
+          email_domain: email.split('@')[1],
           timestamp: new Date().toISOString()
         });
       } else {
