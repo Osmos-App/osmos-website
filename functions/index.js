@@ -13,6 +13,25 @@ function getDb() {
   return getFirestore();
 }
 
+// IP anonymization helper (GDPR/KVKK compliant)
+function anonymizeIp(ip) {
+  if (!ip) return null;
+  const rawIp = ip.split(',')[0].trim();
+  if (rawIp.includes('.')) {
+    const parts = rawIp.split('.');
+    if (parts.length === 4) {
+      return `${parts[0]}.${parts[1]}.${parts[2]}.0`;
+    }
+  }
+  if (rawIp.includes(':')) {
+    const parts = rawIp.split(':');
+    if (parts.length > 2) {
+      return `${parts[0]}:${parts[1]}:${parts[2]}::0`;
+    }
+  }
+  return rawIp;
+}
+
 // Lazy-loaded Nodemailer SMTP Transport pool
 let transporter;
 
@@ -151,7 +170,18 @@ exports.subscribe = onRequest(
       return res.status(405).json({ success: false, message: "Method Not Allowed" });
     }
 
-    const { email } = req.body;
+    const { email, consent, honeypot } = req.body;
+
+    // Bot prevention: Honeypot check
+    if (honeypot) {
+      logger.warn("Bot detected via honeypot field submission.");
+      return res.status(400).json({ success: false, message: "Spam request rejected." });
+    }
+
+    // Bot prevention: Consent check
+    if (consent !== true) {
+      return res.status(400).json({ success: false, message: "Consent is required to subscribe." });
+    }
 
     // Basic email input validation
     if (!email || typeof email !== "string" || !email.includes("@")) {
@@ -169,7 +199,7 @@ exports.subscribe = onRequest(
       const existing = await docRef.get();
 
       const requestMeta = {
-        ip: req.ip || req.headers["x-forwarded-for"] || null,
+        ip: anonymizeIp(req.ip || req.headers["x-forwarded-for"]),
         userAgent: req.headers["user-agent"] || null,
         referrer: req.headers["referer"] || req.headers["referrer"] || null,
         origin: req.headers["origin"] || null,

@@ -70,6 +70,10 @@ if (waitlistForm) {
     const email = waitlistEmail.value.trim();
     if (!email) return;
 
+    // Get honeypot and consent values for bot prevention
+    const honeypot = document.getElementById('waitlist-honeypot')?.value || '';
+    const consent = document.getElementById('waitlist-consent')?.checked || false;
+
     // Reset feedback
     waitlistFeedback.className = 'waitlist-feedback';
     waitlistFeedback.textContent = '';
@@ -86,7 +90,7 @@ if (waitlistForm) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({ email: email, consent: consent, honeypot: honeypot })
       });
 
       const data = await response.json();

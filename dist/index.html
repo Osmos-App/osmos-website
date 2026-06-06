@@ -29,7 +29,7 @@
     }
   }
   </script>
-  <script type="module" crossorigin src="/assets/main-BDhm8Bj_.js"></script>
+  <script type="module" crossorigin src="/assets/main-BrydfG25.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/main-2wCfR1Wj.css">
 </head>
 
@@ -86,23 +86,29 @@
         </p>
         <div class="actions rise d4">
           <form class="waitlist-form" id="waitlist-form">
+            <!-- Honeypot field for bot prevention -->
+            <input type="text" id="waitlist-honeypot" name="waitlist-honeypot" style="display: none !important;" tabindex="-1" autocomplete="off" />
+
             <div class="waitlist-content" id="waitlist-content"
               style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
               <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email" required />
               <button type="submit" class="btn" id="waitlist-submit">
                 Join Alpha <span class="arr">→</span>
               </button>
+              
+              <!-- Checkbox Consent -->
+              <div class="waitlist-consent-container" style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; width: 100%;">
+                <input type="checkbox" id="waitlist-consent" required style="margin-top: 3px; cursor: pointer;" />
+                <label for="waitlist-consent" style="font-family: var(--mono); font-size: 0.65rem; color: var(--ink-3); line-height: 1.4; cursor: pointer; user-select: none;">
+                  I consent to the secure processing of my email address under the <a href="/privacy" class="textlink" style="font-size: 0.65rem;">Privacy Notice</a>.
+                </label>
+              </div>
             </div>
             <div class="waitlist-success-view" id="waitlist-success-view" style="display: none;">
               <h3>Welcome to the Alpha!</h3>
               <p>Check your inbox to get started.</p>
             </div>
             <div class="waitlist-feedback" id="waitlist-feedback"></div>
-            <p class="waitlist-privacy-notice"
-              style="font-family: var(--mono); font-size: 0.65rem; color: var(--ink-3); margin-top: 10px; width: 100%;">
-              We process your email securely via Google Workspace. Read our <a href="/privacy" class="textlink"
-                style="font-size: 0.65rem;">Privacy Notice</a>.
-            </p>
           </form>
         </div>
       </div>

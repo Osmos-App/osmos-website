@@ -42,6 +42,9 @@ def run_tests():
         # Fill in a mock email address
         email_input.fill('test_e2e_playwright@useosmos.com')
         
+        # Check the consent checkbox
+        page.locator('#waitlist-consent').check()
+        
         # Intercept subscribe API call to return a mock success response so we don't spam email delivery systems
         page.route('**/api/subscribe', lambda route: route.fulfill(
             status=200,
