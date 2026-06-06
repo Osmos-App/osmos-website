@@ -169,10 +169,11 @@ checkRegistration();
 // Theme Toggle with View Transition API Circular Ripple
 const themeToggleBtn = document.getElementById('theme-toggle');
 if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', function (e) {
-    // Set coordinates as CSS variables for the circular clip path
-    const x = e.clientX;
-    const y = e.clientY;
+  themeToggleBtn.addEventListener('click', function () {
+    // Set coordinates to the center of the theme toggle button for a perfect circular expansion
+    const rect = themeToggleBtn.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
     document.documentElement.style.setProperty('--click-x', x + 'px');
     document.documentElement.style.setProperty('--click-y', y + 'px');
 
