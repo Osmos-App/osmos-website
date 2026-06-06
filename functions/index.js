@@ -1,6 +1,17 @@
 const { onRequest } = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const nodemailer = require("nodemailer");
+const { initializeApp, getApps } = require("firebase-admin/app");
+const { getFirestore, FieldValue } = require("firebase-admin/firestore");
+
+// Initialize Firebase Admin SDK (singleton)
+if (!getApps().length) {
+  initializeApp();
+}
+
+function getDb() {
+  return getFirestore();
+}
 
 // Lazy-loaded Nodemailer SMTP Transport pool
 let transporter;
@@ -152,9 +163,48 @@ exports.subscribe = onRequest(
     try {
       logger.info(`Processing subscription request for: ${subscriberEmail}`);
 
+      // --- Firestore: write subscriber record with detailed metadata ---
+      const db = getDb();
+      const docRef = db.collection("subscribers").doc(subscriberEmail);
+      const existing = await docRef.get();
+
+      const requestMeta = {
+        ip: req.ip || req.headers["x-forwarded-for"] || null,
+        userAgent: req.headers["user-agent"] || null,
+        referrer: req.headers["referer"] || req.headers["referrer"] || null,
+        origin: req.headers["origin"] || null,
+        acceptLanguage: req.headers["accept-language"] || null,
+      };
+
+      if (!existing.exists) {
+        // New subscriber — create full record
+        await docRef.set({
+          email: subscriberEmail,
+          source: "waitlist",
+          status: "pending_email",
+          subscribedAt: FieldValue.serverTimestamp(),
+          updatedAt: FieldValue.serverTimestamp(),
+          emailDelivery: { status: "pending", messageId: null, sentAt: null },
+          request: requestMeta,
+          resubscribeCount: 0,
+        });
+        logger.info(`New subscriber saved to Firestore: ${subscriberEmail}`);
+      } else {
+        // Already subscribed — update metadata & increment counter
+        await docRef.set({
+          updatedAt: FieldValue.serverTimestamp(),
+          resubscribeCount: FieldValue.increment(1),
+          request: requestMeta,
+        }, { merge: true });
+        logger.info(`Returning subscriber updated in Firestore: ${subscriberEmail}`);
+      }
+      // ----------------------------------------------------------------
+
       // Verify SMTP credentials exist in the request context (bound secrets)
       if (!process.env.GOOGLE_SMTP_USER || !process.env.GOOGLE_SMTP_APP_PASS) {
         logger.error("Missing Google SMTP credentials in environment variables.");
+        // Mark status as config_error in Firestore
+        await docRef.set({ status: "config_error", updatedAt: FieldValue.serverTimestamp() }, { merge: true });
         return res.status(500).json({ success: false, message: "Server configuration error." });
       }
 
@@ -169,9 +219,31 @@ exports.subscribe = onRequest(
       const info = await getTransporter().sendMail(mailOptions);
       logger.info(`Welcome email sent successfully: ${info.messageId}`);
 
+      // Update Firestore with successful email delivery info
+      await docRef.set({
+        status: "subscribed",
+        updatedAt: FieldValue.serverTimestamp(),
+        emailDelivery: {
+          status: "sent",
+          messageId: info.messageId || null,
+          sentAt: FieldValue.serverTimestamp(),
+        },
+      }, { merge: true });
+
       return res.status(200).json({ success: true, message: "Successfully subscribed!" });
     } catch (error) {
       logger.error("Error sending subscription email:", error);
+      // Best-effort: mark email delivery as failed in Firestore
+      try {
+        const db = getDb();
+        await db.collection("subscribers").doc(subscriberEmail).set({
+          status: "email_failed",
+          updatedAt: FieldValue.serverTimestamp(),
+          emailDelivery: { status: "failed", error: error.message || "unknown" },
+        }, { merge: true });
+      } catch (fsErr) {
+        logger.error("Firestore update failed after email error:", fsErr);
+      }
       return res.status(500).json({ success: false, message: "Failed to process subscription. Please try again later." });
     }
   });

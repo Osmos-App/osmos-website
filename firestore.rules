@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // subscribers collection: only Firebase Admin SDK (server) can read/write
+    // No client-side access permitted
+    match /subscribers/{email} {
+      allow read, write: if false;
+    }
+  }
+}
