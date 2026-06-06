@@ -1110,3 +1110,76 @@ html.theme-transition::view-transition-new(root) {
         opacity: 1;
     }
 }
+
+/* Cookie Consent Popup Styling */
+.cookie-popup {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    max-width: 360px;
+    background: color-mix(in srgb, var(--paper-2) 90%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--rule-2);
+    border-radius: 4px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    animation: slide-up-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    view-transition-name: cookie-popup;
+}
+
+:root[data-theme="dark"] .cookie-popup {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cookie-popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cookie-popup p {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+}
+
+.cookie-popup p a {
+    text-decoration: underline;
+}
+
+.cookie-btn {
+    align-self: flex-end;
+    padding: 8px 16px;
+    font-size: 0.74rem;
+}
+
+/* Entrance/Exit Animations */
+@keyframes slide-up-in {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+::view-transition-old(cookie-popup) {
+    animation: 0.4s cubic-bezier(0.4, 0, 0.2, 1) slide-down-out;
+}
+
+@keyframes slide-down-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+}

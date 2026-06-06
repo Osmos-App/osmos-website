@@ -195,3 +195,54 @@ if (themeToggleBtn) {
     }
   });
 }
+
+// Cookie Consent Popup with View Transition dismissal
+const initCookieConsent = () => {
+  try {
+    const isAccepted = localStorage.getItem('osmos_cookies_accepted') === 'true';
+    if (isAccepted) return;
+
+    // Create popup HTML structure
+    const popup = document.createElement('div');
+    popup.id = 'cookie-popup';
+    popup.className = 'cookie-popup';
+    popup.innerHTML = `
+      <div class="cookie-popup-content">
+        <p>We use essential cookies to save your preferences. Read our <a href="/privacy" class="textlink">Privacy Notice</a>.</p>
+        <button id="cookie-accept" class="btn cookie-btn">Accept</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Setup accept handler
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        try {
+          localStorage.setItem('osmos_cookies_accepted', 'true');
+        } catch (e) {
+          console.warn('LocalStorage is not available:', e);
+        }
+
+        const dismissPopup = () => {
+          popup.remove();
+        };
+
+        if (document.startViewTransition) {
+          document.startViewTransition(dismissPopup);
+        } else {
+          dismissPopup();
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('LocalStorage is not available:', e);
+  }
+};
+
+// Start cookie consent on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCookieConsent);
+} else {
+  initCookieConsent();
+}
