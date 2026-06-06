@@ -3,6 +3,7 @@ const logger = require("firebase-functions/logger");
 const nodemailer = require("nodemailer");
 const { initializeApp, getApps } = require("firebase-admin/app");
 const { getFirestore, FieldValue } = require("firebase-admin/firestore");
+const crypto = require("crypto");
 
 // Initialize Firebase Admin SDK (singleton)
 if (!getApps().length) {
@@ -11,6 +12,12 @@ if (!getApps().length) {
 
 function getDb() {
   return getFirestore();
+}
+
+function getIpHash(ip) {
+  if (!ip) return "unknown";
+  const rawIp = ip.split(',')[0].trim();
+  return crypto.createHash("sha256").update(rawIp).digest("hex");
 }
 
 // IP anonymization helper (GDPR/KVKK compliant)
@@ -170,6 +177,42 @@ exports.subscribe = onRequest(
       return res.status(405).json({ success: false, message: "Method Not Allowed" });
     }
 
+    const db = getDb();
+    const clientIp = req.ip || req.headers["x-forwarded-for"] || "";
+    const ipHash = getIpHash(clientIp);
+    const limitRef = db.collection("rate_limits").doc(ipHash);
+    const now = Date.now();
+
+    // Rate limiting check: Max 5 submissions per minute per IP hash (GDPR-compliant hash)
+    try {
+      const limitDoc = await limitRef.get();
+      if (limitDoc.exists) {
+        const data = limitDoc.data();
+        const timeWindow = 60 * 1000; // 1 minute window
+        if (now - data.resetTime < timeWindow) {
+          if (data.count >= 5) { // Max 5 requests per minute
+            logger.warn(`Rate limit exceeded for IP hash: ${ipHash}`);
+            return res.status(429).json({ success: false, message: "Too many requests. Please try again in a minute." });
+          }
+          await limitRef.update({
+            count: FieldValue.increment(1)
+          });
+        } else {
+          await limitRef.set({
+            count: 1,
+            resetTime: now
+          });
+        }
+      } else {
+        await limitRef.set({
+          count: 1,
+          resetTime: now
+        });
+      }
+    } catch (rateErr) {
+      logger.error("Rate limit check failed:", rateErr);
+    }
+
     const { email, consent, honeypot } = req.body;
 
     // Bot prevention: Honeypot check
@@ -183,8 +226,9 @@ exports.subscribe = onRequest(
       return res.status(400).json({ success: false, message: "Consent is required to subscribe." });
     }
 
-    // Basic email input validation
-    if (!email || typeof email !== "string" || !email.includes("@")) {
+    // Strict email input validation (RFC 5322 compliant regex) to prevent injection/XSS inputs
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!email || typeof email !== "string" || email.length > 254 || !emailRegex.test(email)) {
       return res.status(400).json({ success: false, message: "A valid email address is required." });
     }
 
@@ -194,12 +238,11 @@ exports.subscribe = onRequest(
       logger.info(`Processing subscription request for: ${subscriberEmail}`);
 
       // --- Firestore: write subscriber record with detailed metadata ---
-      const db = getDb();
       const docRef = db.collection("subscribers").doc(subscriberEmail);
       const existing = await docRef.get();
 
       const requestMeta = {
-        ip: anonymizeIp(req.ip || req.headers["x-forwarded-for"]),
+        ip: anonymizeIp(clientIp),
         userAgent: req.headers["user-agent"] || null,
         referrer: req.headers["referer"] || req.headers["referrer"] || null,
         origin: req.headers["origin"] || null,
@@ -265,7 +308,6 @@ exports.subscribe = onRequest(
       logger.error("Error sending subscription email:", error);
       // Best-effort: mark email delivery as failed in Firestore
       try {
-        const db = getDb();
         await db.collection("subscribers").doc(subscriberEmail).set({
           status: "email_failed",
           updatedAt: FieldValue.serverTimestamp(),
