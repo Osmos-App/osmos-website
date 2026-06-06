@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osmos — local-first version control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-CwdHoOnv.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B7WzlA95.css">
+</head>
+
+<body>
+
+  <div class="grain"></div>
+  <div class="frame"><i></i></div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <div class="brand">
+        <span class="mark">Osmos</span>
+        <span class="tag">Local-first version control</span>
+      </div>
+      <nav class="links">
+        <a href="#engine">Features</a>
+        <a href="#spec">Architecture</a>
+        <a href="#roadmap">Roadmap</a>
+        <a>Coming soon to GitHub</a>
+      </nav>
+      <span class="ver"><span class="sq"></span>v0.1.0-α</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="def rise d1">
+          <span class="w">osmos</span> — the gradual movement of a system toward a shared equilibrium.
+        </p>
+        <h1 class="display rise d2">Version control for the way you <em>actually</em> work.</h1>
+        <p class="lede rise d3">
+          Osmos is a local-first version control system built for designers, writers, and teams. No cloud required. No
+          complex CLI commands. Just your files, versioned and synced across your devices — privately, locally, and
+          fast.
+        </p>
+        <div class="actions rise d4">
+          <a class="btn" href="#engine">How it works <span class="arr">→</span></a>
+          <div class="chip" style="pointer-events: none; border-color: var(--rule-2); background: transparent;">
+            <span class="prompt">~</span> Alpha build in progress
+          </div>
+          <span class="textlink" style="color: var(--ink-3); cursor: default;">Coming soon to GitHub</span>
+        </div>
+      </div>
+
+      <aside class="meta rise d5">
+        <div class="cap">System stack</div>
+        <div class="mrow"><span>ui</span><b>SwiftUI, MD3, Native</b></div>
+        <div class="mrow"><span>core</span><b>Rust</b></div>
+        <div class="mrow"><span>discovery</span><b>mDNS</b></div>
+        <div class="mrow"><span>security</span><b>AES-GCM</b></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="figsec divider">
+    <div class="wrap">
+      <figure class="fig reveal">
+        <div class="fig-head">
+          <span class="no">Fig. 1</span><span class="tl">Peer-to-peer sync architecture</span>
+        </div>
+        <div class="fig-body">
+          <svg viewBox="0 0 760 340" role="img"
+            aria-label="Diagram of state propagating between peers on a local network until they converge.">
+            <rect class="d-boundary" x="48" y="30" width="664" height="278" rx="10"></rect>
+            <text class="d-anno" x="60" y="22">Local network — no egress</text>
+
+            <line class="d-edge" x1="170" y1="118" x2="382" y2="92"></line>
+            <line class="d-edge" x1="170" y1="118" x2="296" y2="252"></line>
+            <line class="d-edge" x1="382" y1="92" x2="600" y2="150"></line>
+            <line class="d-edge" x1="382" y1="92" x2="556" y2="262"></line>
+            <line class="d-edge" x1="296" y1="252" x2="556" y2="262"></line>
+            <line class="d-edge" x1="600" y1="150" x2="556" y2="262"></line>
+
+            <circle class="d-packet" r="3.6">
+              <animateMotion dur="2.8s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1"
+                calcMode="spline" keySplines="0.4 0 0.2 1; 0 0 0 0" path="M170,118 L382,92"></animateMotion>
+            </circle>
+            <circle class="d-packet" r="3.6">
+              <animateMotion dur="2.8s" begin="0.4s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1"
+                calcMode="spline" keySplines="0.4 0 0.2 1; 0 0 0 0" path="M170,118 L296,252"></animateMotion>
+            </circle>
+            <circle class="d-packet" r="3.6">
+              <animateMotion dur="2.8s" begin="1.1s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1"
+                calcMode="spline" keySplines="0.4 0 0.2 1; 0 0 0 0" path="M382,92 L600,150"></animateMotion>
+            </circle>
+            <circle class="d-packet" r="3.6">
+              <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1"
+                calcMode="spline" keySplines="0.4 0 0.2 1; 0 0 0 0" path="M382,92 L556,262"></animateMotion>
+            </circle>
+            <circle class="d-packet" r="3.6">
+              <animateMotion dur="2.8s" begin="1.8s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1"
+                calcMode="spline" keySplines="0.4 0 0.2 1; 0 0 0 0" path="M296,252 L556,262"></animateMotion>
+            </circle>
+
+            <g>
+              <circle class="d-node-ring pulse" cx="170" cy="118" r="15" style="animation-delay:0s"></circle>
+              <circle class="d-node-core origin" cx="170" cy="118" r="7.5"></circle>
+              <text class="d-label" x="170" y="150" text-anchor="middle">MacBook (Hub)</text>
+              <text class="d-anno" x="170" y="92" text-anchor="middle" style="fill:var(--accent)">source of truth</text>
+            </g>
+            <g>
+              <circle class="d-node-ring pulse" cx="382" cy="92" r="15" style="animation-delay:.5s"></circle>
+              <circle class="d-node-core" cx="382" cy="92" r="7.5"></circle>
+              <text class="d-label" x="382" y="72" text-anchor="middle">iPad</text>
+            </g>
+            <g>
+              <circle class="d-node-ring pulse" cx="600" cy="150" r="15" style="animation-delay:1.1s"></circle>
+              <circle class="d-node-core" cx="600" cy="150" r="7.5"></circle>
+              <text class="d-label" x="600" y="182" text-anchor="middle">Windows PC</text>
+            </g>
+            <g>
+              <circle class="d-node-ring pulse" cx="296" cy="252" r="15" style="animation-delay:1.4s"></circle>
+              <circle class="d-node-core" cx="296" cy="252" r="7.5"></circle>
+              <text class="d-label" x="296" y="284" text-anchor="middle">Android</text>
+            </g>
+            <g>
+              <circle class="d-node-ring pulse" cx="556" cy="262" r="15" style="animation-delay:1.8s"></circle>
+              <circle class="d-node-core" cx="556" cy="262" r="7.5"></circle>
+              <text class="d-label" x="556" y="294" text-anchor="middle">Linux Server</text>
+              <text class="d-anno" x="556" y="238" text-anchor="middle">syncs when online</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>
+          When the hub is offline, clients queue their changes locally. The moment the hub comes back online, everything
+          syncs automatically over the local network. No external servers involved.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section divider" id="engine">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="kicker">§1 — Principles</span>
+        <h2>Version control for everyone.</h2>
+      </header>
+
+      <div class="grid3">
+        <article class="reveal s1">
+          <span class="idx">01</span>
+          <span class="lbl">Versioning</span>
+          <h3>Snapshot-based</h3>
+          <p>Every save is a full snapshot, not a complex diff. Revert a single file or an entire commit instantly with
+            two-level rollback. Conflicts are automatically resolved by timestamp (LWW) via the central hub.</p>
+        </article>
+
+        <article class="reveal s2">
+          <span class="idx">02</span>
+          <span class="lbl">Networking</span>
+          <h3>Local & Offline</h3>
+          <p>Work without a connection and sync when ready. Osmos uses mDNS to discover devices on your local network.
+            Once reachable, your local queue syncs with the hub instantly. Completely offline-capable.</p>
+        </article>
+
+        <article class="reveal s3">
+          <span class="idx">03</span>
+          <span class="lbl">Security</span>
+          <h3>End-to-end encrypted</h3>
+          <p>Your files are encrypted with PBKDF2-derived keys that only you hold. Data is stored securely via AES-GCM
+            and transport is protected via the Noise Protocol. Total privacy by design.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="figsec divider">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="kicker">§ Preview</span>
+        <h2>How it works.</h2>
+      </header>
+
+      <figure class="fig reveal">
+        <div class="fig-head">
+          <span class="no">Fig. 2</span><span class="tl">Hub & Client Architecture Concept</span>
+        </div>
+        <div class="fig-body" style="padding:clamp(20px,3vw,34px) clamp(18px,3vw,34px);">
+          <pre class="mono"
+            style="margin:0; font-size:clamp(.8rem,1.4vw,.94rem); line-height:1.85; color:var(--ink); overflow-x:auto;"><span style="color:var(--ink-3); font-style:italic">// One device acts as the central source of truth.</span>
+<span style="color:var(--accent)">Main Computer</span> (Hub)
+├── Receives changes from all clients
+├── Resolves conflicts by timestamp (LWW)
+├── Manages admin queue for pending diffs
+└── Serves as the source of truth
+
+<span style="color:var(--ink-3); font-style:italic">// All other devices act as read/write clients.</span>
+<span style="color:var(--accent)">Phones / Tablets / Laptops</span> (Clients)
+├── Track and version local changes
+├── Queue changes when hub is offline
+└── Sync automatically when hub is reachable</pre>
+        </div>
+        <figcaption>
+          No CLI commands to learn. Everything is managed through native interfaces: SwiftUI for Apple ecosystems,
+          Material Design 3 for Android, and native UI for Windows and Linux.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section divider" id="spec">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="kicker">§2 — Specification</span>
+        <h2>Technical overview.</h2>
+      </header>
+
+      <dl class="spec">
+        <div class="row reveal s1">
+          <dt>Interface</dt>
+          <dd>SwiftUI, MD3, Native <span class="q">· No CLI required</span></dd>
+        </div>
+        <div class="row reveal s1">
+          <dt>Architecture</dt>
+          <dd>Hub & Client <span class="q">· local-first, peer-to-peer</span></dd>
+        </div>
+        <div class="row reveal s2">
+          <dt>Versioning</dt>
+          <dd>Snapshots <span class="q">· two-level rollback</span></dd>
+        </div>
+        <div class="row reveal s2">
+          <dt>Conflict resolution</dt>
+          <dd>Timestamp (LWW) <span class="q">· admin queue for pending changes</span></dd>
+        </div>
+        <div class="row reveal s3">
+          <dt>Discovery</dt>
+          <dd>mDNS (_osmos._tcp.local) <span class="q">· on the local subnet</span></dd>
+        </div>
+        <div class="row reveal s3">
+          <dt>Encryption</dt>
+          <dd>AES-GCM via CryptoKit <span class="q">· Noise Protocol for transport</span></dd>
+        </div>
+        <div class="row reveal s4">
+          <dt>Recovery</dt>
+          <dd>BIP-39 <span class="q">· 24-word recovery phrase</span></dd>
+        </div>
+        <div class="row reveal s4">
+          <dt>Core Engine</dt>
+          <dd>Rust <span class="q">· with optional gitoxide backend</span></dd>
+        </div>
+        <div class="row reveal s5">
+          <dt>Platform</dt>
+          <dd>Apple, Android, Windows, Linux <span class="q">· Cross-platform native</span></dd>
+        </div>
+        <div class="row reveal s5">
+          <dt>Status</dt>
+          <dd>v0.1.0-α <span class="q">· In active development</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section divider" id="roadmap">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="kicker">§3 — Roadmap</span>
+        <h2>What's next for Osmos.</h2>
+      </header>
+
+      <div class="grid3">
+        <article class=" reveal s1">
+          <span class="idx">Phase 1</span>
+          <span class="lbl" style="color: var(--primary);">Current</span>
+          <h3>Core & macOS Alpha</h3>
+          <p>Stabilizing the Rust engine, mDNS peer discovery, and LWW conflict resolution. Releasing the initial Hub &
+            Client native interface for macOS built with SwiftUI.</p>
+        </article>
+
+        <article class="reveal s2">
+          <span class="idx">Phase 2</span>
+          <span class="lbl">In Development</span>
+          <h3>Cross-Platform Beta</h3>
+          <p>Expanding client support with Material Design 3 for Android, and native UIs for Windows and Linux. Rolling
+            out iOS read-only companion app and robust FFI bindings.</p>
+        </article>
+
+        <article class="reveal s3">
+          <span class="idx">Phase 3</span>
+          <span class="lbl">Planned</span>
+          <h3>Git Interop & v1.0</h3>
+          <p>Integrating the optional <code>gitoxide</code> backend for seamless import/export to legacy Git
+            repositories. Finalizing admin queue workflows and security audits for the 1.0 release.</p>
+        </article>
+      </div>
+
+      <div class="close reveal s4">
+        <div class="actions">
+          <button class="btn" disabled
+            style="opacity: 0.6; cursor: not-allowed; border: 1px solid var(--border);">Coming soon to GitHub</button>
+          <a class="textlink" href="#spec">Review the spec</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="colo">
+        <svg class="node-mark" width="34" height="14" viewBox="0 0 34 14" aria-hidden="true">
+          <line x1="4" y1="7" x2="17" y2="3" stroke="var(--rule-2)"></line>
+          <line x1="17" y1="3" x2="30" y2="10" stroke="var(--rule-2)"></line>
+          <line x1="4" y1="7" x2="30" y2="10" stroke="var(--rule-2)"></line>
+          <circle cx="4" cy="7" r="3" fill="var(--accent)"></circle>
+          <circle cx="17" cy="3" r="2.6" fill="none" stroke="var(--ink-3)"></circle>
+          <circle cx="30" cy="10" r="2.6" fill="none" stroke="var(--ink-3)"></circle>
+        </svg>
+        <span>Osmos — local-first version control</span>
+      </div>
+      <div>Set in Newsreader &amp; DM Mono · © <span id="yr">2026</span></div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
