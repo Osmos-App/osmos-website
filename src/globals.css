@@ -18,13 +18,13 @@
 }
 
 :root {
-    /* ── Brand tokens — mirrors your globals.css. */
-    --bg: #f5f5f7;
-    --surface: #fafafa;
-    --primary: #4355b9;
-    --text: #1c1c1e;
+    /* ── Brand tokens — tek spot renk: petrol/deniz camı (ozmoz teması). */
+    --bg: #f4f5f3;
+    --surface: #fafaf9;
+    --primary: #0d6f66;
+    --text: #1b1d1c;
     --error: #ba1a1a;
-    --border: #e5e5ea;
+    --border: #e3e6e4;
 
     /* ── Design aliases, derived from your tokens (theme-agnostic) ── */
     --paper: var(--bg);
@@ -42,22 +42,22 @@
 }
 
 :root[data-theme="dark"] {
-    --bg: #0d0d10;
-    --surface: #18181e;
-    --primary: #7c8ff0;
-    --text: #e0e0e3;
+    --bg: #0c0f0e;
+    --surface: #151a19;
+    --primary: #5ad4c2;
+    --text: #e0e3e2;
     --error: #e28888;
-    --border: #3f3f4e;
+    --border: #3a4341;
 }
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --bg: #0d0d10;
-        --surface: #18181e;
-        --primary: #7c8ff0;
-        --text: #e0e0e3;
+        --bg: #0c0f0e;
+        --surface: #151a19;
+        --primary: #5ad4c2;
+        --text: #e0e3e2;
         --error: #e28888;
-        --border: #3f3f4e;
+        --border: #3a4341;
     }
 }
 
@@ -917,65 +917,54 @@ footer a:hover {
     }
 
     .pulse,
-    .d-packet {
+    .d-packet,
+    .dev-status .dot {
         animation: none !important;
     }
 }
 
-/* ── Waitlist Form Styles ── */
-.waitlist-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+/* ── Geliştirme durumu (hero) ── */
+.dev-status {
+    border-left: 2px solid var(--accent);
+    padding-left: 20px;
+    max-width: 52ch;
+}
+
+.dev-status .status-line {
+    display: inline-flex;
     align-items: center;
-    width: 100%;
-    max-width: 450px;
-}
-
-.waitlist-input {
+    gap: 10px;
     font-family: var(--mono);
-    font-size: .8rem;
-    background: var(--paper-2);
-    color: var(--ink);
-    border: 1px solid var(--rule-2);
-    border-radius: 2px;
-    padding: 14px 18px;
-    flex: 1;
-    min-width: 200px;
-    outline: none;
-    transition: border-color 0.25s ease;
-}
-
-.waitlist-input:focus {
-    border-color: var(--accent);
-}
-
-.waitlist-form button {
-    border: none;
-    cursor: pointer;
-}
-
-.waitlist-form button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.waitlist-feedback {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    margin-top: 8px;
-    display: none;
-    width: 100%;
-}
-
-.waitlist-feedback.success {
-    display: block;
+    font-size: .72rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
     color: var(--accent);
 }
 
-.waitlist-feedback.error {
-    display: block;
-    color: var(--error);
+.dev-status .dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    animation: breathe 2.6s ease-in-out infinite;
+}
+
+.dev-status .status-note {
+    margin-top: 10px;
+    font-size: .98rem;
+    color: var(--ink-2);
+    line-height: 1.6;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .25;
+    }
 }
 
 .theme-toggle {
@@ -1043,32 +1032,6 @@ html.theme-transition::view-transition-new(root) {
     to {
         clip-path: circle(150% at var(--click-x, 50%) var(--click-y, 50%));
     }
-}
-
-/* Waitlist Form Morphing */
-.waitlist-form {
-    view-transition-name: waitlist-box;
-}
-
-.waitlist-success-view {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    padding: 8px 0;
-    text-align: left;
-    width: 100%;
-}
-
-.waitlist-success-view h3 {
-    font-size: 1.05rem;
-    color: var(--accent);
-    margin-bottom: 6px;
-    font-weight: 500;
-}
-
-.waitlist-success-view p {
-    font-size: 0.82rem;
-    color: var(--ink-2);
-    margin: 0;
 }
 
 /* Custom view transition for the theme icon itself */
@@ -1184,51 +1147,3 @@ html.theme-transition::view-transition-new(root) {
     }
 }
 
-/* Custom Checkbox Design for Waitlist Consent */
-.waitlist-consent-container input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    border: 1px solid var(--border);
-    background: var(--paper-2);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    margin-top: 3px;
-    flex-shrink: 0;
-    transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.waitlist-consent-container input[type="checkbox"]:focus-visible {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-tint);
-}
-
-.waitlist-consent-container input[type="checkbox"]:hover {
-    border-color: var(--ink-2);
-}
-
-.waitlist-consent-container input[type="checkbox"]:checked {
-    background: var(--accent);
-    border-color: var(--accent);
-}
-
-/* Draw a custom checkmark using ::after */
-.waitlist-consent-container input[type="checkbox"]::after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: 1px;
-    width: 4px;
-    height: 8px;
-    border: solid var(--paper);
-    border-width: 0 1.5px 1.5px 0;
-    transform: rotate(45deg) scale(0);
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.waitlist-consent-container input[type="checkbox"]:checked::after {
-    transform: rotate(45deg) scale(1);
-}
