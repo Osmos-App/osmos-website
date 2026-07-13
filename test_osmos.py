@@ -30,42 +30,22 @@ def run_tests():
         assert initial_theme != new_theme, "Theme attribute did not change!"
         print("✅ Test 1 Passed: Theme toggled successfully.")
         
-        # Test 2: Waitlist Form Morphing Success State
-        print("✉️ Running Test 2: Waitlist form morphing validation...")
-        
-        email_input = page.locator('#waitlist-email')
-        submit_btn = page.locator('#waitlist-submit')
-        
-        # Ensure form is visible
-        assert email_input.is_visible(), "Email input is not visible!"
-        
-        # Fill in a mock email address
-        email_input.fill('test_e2e_playwright@useosmos.com')
-        
-        # Check the consent checkbox
-        page.locator('#waitlist-consent').check()
-        
-        # Intercept subscribe API call to return a mock success response so we don't spam email delivery systems
-        page.route('**/api/subscribe', lambda route: route.fulfill(
-            status=200,
-            content_type='application/json',
-            body='{"success": true, "message": "Subscribed successfully"}'
-        ))
-        
-        # Click the submit button
-        submit_btn.click()
-        
-        # Wait for the success morph animation and view to become visible
-        success_view = page.locator('#waitlist-success-view')
-        success_view.wait_for(state='visible', timeout=5000)
-        
-        # Verify inputs are hidden
-        content_view = page.locator('#waitlist-content')
-        assert not content_view.is_visible(), "Waitlist content is still visible!"
-        assert success_view.is_visible(), "Waitlist success view is not visible!"
-        
-        print("✅ Test 2 Passed: Waitlist form successfully morphed into success view.")
-        
+        # Test 2: Hero development status block
+        print("🛠️ Running Test 2: Hero development status validation...")
+
+        status_line = page.locator('.dev-status .status-line')
+        assert status_line.is_visible(), "Development status line is not visible!"
+        assert 'in active development' in status_line.inner_text().lower(), "Status text mismatch!"
+
+        # Waitlist form must be fully removed
+        assert page.locator('#waitlist-form').count() == 0, "Waitlist form is still present!"
+
+        # Status note links to GitHub
+        github_link = page.locator('.dev-status a[href*="github.com"]')
+        assert github_link.count() == 1, "GitHub link missing from status note!"
+
+        print("✅ Test 2 Passed: Development status visible, waitlist fully removed.")
+
         browser.close()
 
 if __name__ == '__main__':
