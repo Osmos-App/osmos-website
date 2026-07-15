@@ -345,12 +345,37 @@ nav.links a:hover::after {
     font-style: italic;
 }
 
+.hero-pre-headline {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.forget-line {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    color: var(--ink-2);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.forget-line kbd, .forget-line .mono {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    padding: 2px 6px;
+    background: var(--wash);
+    border-radius: 4px;
+    border: 1px solid var(--rule-2);
+    color: var(--ink);
+}
+
 h1.display {
-    font-size: clamp(2.7rem, 7.4vw, 5.6rem);
-    line-height: 1.0;
-    letter-spacing: -.028em;
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    line-height: 1.05;
+    letter-spacing: -.03em;
     font-weight: 500;
-    margin-bottom: 34px;
+    margin-bottom: 40px;
     max-width: 14ch;
 }
 
@@ -465,19 +490,30 @@ h1.display em {
 .comparison {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
+    align-items: stretch;
+    gap: 32px;
+    margin: 48px 0 64px;
     font-family: var(--mono);
-    font-size: .8rem;
+    font-size: .85rem;
 }
 
 .comp-col {
-    background: var(--paper-2);
+    background: color-mix(in srgb, var(--paper-2) 60%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--rule-2);
-    border-radius: 4px;
-    padding: 16px;
-    min-width: 220px;
+    border-radius: 12px;
+    padding: 24px 32px;
+    min-width: 260px;
+    box-shadow: 0 4px 24px -6px color-mix(in srgb, var(--ink) 5%, transparent);
+    display: flex;
+    flex-direction: column;
+}
+
+.comp-col.after {
+    background: var(--paper-2);
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px -8px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 .comp-lbl {
@@ -486,19 +522,20 @@ h1.display em {
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--ink-3);
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .comp-files {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .comp-files .file {
     color: var(--ink-2);
-    padding-left: 12px;
-    border-left: 1px solid var(--rule-2);
+    padding-left: 14px;
+    border-left: 2px solid var(--rule-2);
+    transition: all 0.2s ease;
 }
 
 .comp-files .file.active {
@@ -509,21 +546,29 @@ h1.display em {
 
 .comp-files .file-meta {
     color: var(--accent);
-    padding-left: 12px;
+    padding-left: 14px;
+    font-size: 0.75rem;
+    margin-top: 4px;
 }
 
 .comp-arrow {
     color: var(--ink-3);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 0 10px;
+    display: flex;
+    align-items: center;
 }
+
 @media (max-width: 600px) {
     .comp-arrow {
         transform: rotate(90deg);
+        margin: -10px auto;
+        justify-content: center;
     }
     .comparison {
         flex-direction: column;
         align-items: stretch;
+        gap: 20px;
     }
 }
 
