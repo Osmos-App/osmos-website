@@ -325,7 +325,6 @@ nav.links a:hover::after {
 @media (min-width:980px) {
     .hero .wrap {
         grid-template-columns: 1fr;
-        max-width: 800px;
     }
 }
 
@@ -376,7 +375,6 @@ h1.display {
     letter-spacing: -.03em;
     font-weight: 500;
     margin-bottom: 40px;
-    max-width: 14ch;
 }
 
 h1.display em {
@@ -387,7 +385,6 @@ h1.display em {
     font-size: clamp(1.08rem, 1.7vw, 1.26rem);
     color: var(--ink-2);
     line-height: 1.6;
-    max-width: 54ch;
     margin-bottom: 40px;
 }
 
