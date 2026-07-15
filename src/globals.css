@@ -315,16 +315,18 @@ nav.links a:hover::after {
     padding: clamp(56px, 11vh, 118px) 0 clamp(60px, 12vh, 120px);
 }
 
-.hero .wrap {
-    display: grid;
-    grid-template-columns: 1fr;
+.hero-content {
+    display: flex;
+    flex-direction: column;
     gap: clamp(40px, 6vw, 72px);
     align-items: start;
 }
 
 @media (min-width:980px) {
-    .hero .wrap {
-        grid-template-columns: 1fr;
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
     }
 }
 

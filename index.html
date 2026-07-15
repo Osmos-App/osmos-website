@@ -74,8 +74,9 @@
 
   <section class="hero">
     <div class="wrap">
-      <div>
-        <div class="hero-pre-headline rise d1">
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="hero-pre-headline rise d1">
           <span class="forget-line">Forget <kbd class="mono">Ctrl + S</kbd>.</span>
           <span class="forget-line">Forget <span class="mono">Final_v27.psd</span>.</span>
           <span class="forget-line">Forget manual backups.</span>
@@ -90,8 +91,10 @@
           Osmos quietly remembers everything you do, automatically.<br>
           No cloud storage limits, no fear of losing work.
         </p>
+        </div>
 
-        <div class="comparison rise d4">
+        <div class="hero-right">
+          <div class="comparison rise d4">
           <div class="comp-col before">
             <span class="comp-lbl">BEFORE</span>
             <div class="comp-files">
@@ -120,7 +123,7 @@
           </p>
         </div>
       </div>
-
+      </div>
 
     </div>
   </section>
@@ -202,8 +205,8 @@
             <g>
               <circle class="d-node-ring pulse" cx="170" cy="118" r="15" style="animation-delay:0s"></circle>
               <circle class="d-node-core origin" cx="170" cy="118" r="7.5"></circle>
-              <text class="d-label" x="170" y="150" text-anchor="middle">MacBook (Hub)</text>
-              <text class="d-anno" x="170" y="92" text-anchor="middle" style="fill:var(--accent)">source of truth</text>
+              <text class="d-label" x="170" y="150" text-anchor="middle">MacBook</text>
+              <text class="d-anno" x="170" y="92" text-anchor="middle" style="fill:var(--accent)">active node</text>
             </g>
             <g>
               <circle class="d-node-ring pulse" cx="382" cy="92" r="15" style="animation-delay:.5s"></circle>
@@ -229,28 +232,22 @@
           </svg>
         </div>
         <figcaption>
-          When your main computer is offline, your other devices queue their changes locally. The moment it comes back online, everything syncs automatically over your local network.
+          Devices queue their changes locally when offline. The moment they reconnect, everything syncs automatically peer-to-peer over your local network.
         </figcaption>
       </figure>
 
       <figure class="fig reveal s2" style="margin-top: clamp(40px, 6vw, 60px);">
         <div class="fig-head">
-          <span class="no">Fig. 2</span><span class="tl">Hub & Client Concept</span>
+          <span class="no">Fig. 2</span><span class="tl">Data Flow</span>
         </div>
         <div class="fig-body" style="padding:clamp(20px,3vw,34px) clamp(18px,3vw,34px);">
           <pre class="mono"
-            style="margin:0; font-size:clamp(.8rem,1.4vw,.94rem); line-height:1.85; color:var(--ink); overflow-x:auto;"><span style="color:var(--ink-3); font-style:italic">// One device acts as the central source of truth.</span>
-<span style="color:var(--accent)">Main Computer</span> (Hub)
-├── Receives changes from all clients
-├── Resolves conflicts automatically
-├── Manages pending changes
-└── Serves as the source of truth
-
-<span style="color:var(--ink-3); font-style:italic">// All other devices act as read/write clients.</span>
-<span style="color:var(--accent)">Phones / Tablets / Laptops</span> (Clients)
+            style="margin:0; font-size:clamp(.8rem,1.4vw,.94rem); line-height:1.85; color:var(--ink); overflow-x:auto;"><span style="color:var(--ink-3); font-style:italic">// Every node maintains its own local history.</span>
+<span style="color:var(--accent)">All Devices</span> (Peer-to-Peer)
 ├── Track local changes invisibly
-├── Queue changes when hub is offline
-└── Sync automatically when hub is reachable</pre>
+├── Maintain a local history graph
+├── Resolve conflicts automatically
+└── Sync seamlessly when on the same network</pre>
         </div>
         <figcaption>
           Everything runs smoothly through a beautiful, cross-platform interface built with Tauri, React, and TypeScript.
@@ -277,7 +274,7 @@
         </div>
         <div class="row reveal s2">
           <dt>Architecture</dt>
-          <dd>Hub & Client <span class="q">· local-first, peer-to-peer</span></dd>
+          <dd>Decentralized <span class="q">· local-first, peer-to-peer</span></dd>
         </div>
         <div class="row reveal s2">
           <dt>Versioning</dt>
@@ -322,15 +319,15 @@
         <article class="reveal s1">
           <span class="idx">Phase 1</span>
           <span class="lbl" style="color: var(--primary);">Desktop Alpha (Current)</span>
-          <h3>macOS</h3>
-          <p>Releasing the initial Hub & desktop interface for macOS.</p>
+          <h3>macOS, Windows & Linux</h3>
+          <p>Releasing the initial cross-platform desktop application.</p>
         </article>
 
         <article class="reveal s2">
           <span class="idx">Phase 2</span>
-          <span class="lbl">Cross-Platform Desktop</span>
-          <h3>Windows & Linux</h3>
-          <p>A unified desktop client, delivering a seamless experience across macOS, Windows, and Linux.</p>
+          <span class="lbl">Peer-to-peer Sync</span>
+          <h3>Local Network</h3>
+          <p>Seamlessly sync your history across all your devices on the local network without relying on cloud servers.</p>
         </article>
 
         <article class="reveal s3">
