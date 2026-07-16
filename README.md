@@ -23,11 +23,9 @@ The site is built as a highly optimized, multi-page product website utilizing a 
 ├── src/
 │   ├── globals.css         # Core styling system, design tokens, and CSS variables
 │   └── main.js             # Client interactivity (Dark mode, waitlist form, animation logic)
-├── functions/
-│   ├── index.js            # Node.js Firebase Cloud Function (subscription, mail SMTP)
-│   └── package.json        # Backend dependencies
 ├── public/                 # Static media and vector assets
 ├── index.html              # Core HTML structure (Home)
+├── privacy.html            # Privacy Policy page
 ├── macos/                  # macOS platform page
 ├── windows/                # Windows platform page
 ├── linux/                  # Linux platform page
@@ -35,6 +33,7 @@ The site is built as a highly optimized, multi-page product website utilizing a 
 ├── features/               # Features page
 ├── security/               # Security page
 ├── pricing/                # Pricing page
+├── open-source/            # Open Source page
 ├── docs/                   # Documentation page
 ├── blog/                   # Blog page
 ├── download/               # Download page

@@ -23,11 +23,9 @@ Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegr
 ├── src/
 │   ├── globals.css         # Temel stil sistemi, tasarım değişkenleri (tokens)
 │   └── main.js             # İstemci mantığı (Karanlık mod, formlar, animasyonlar)
-├── functions/
-│   ├── index.js            # Node.js Firebase Cloud Functions
-│   └── package.json        # Backend bağımlılıkları
 ├── public/                 # Statik dosyalar ve vektörel içerikler
 ├── index.html              # Ana HTML yapısı (Anasayfa)
+├── privacy.html            # Gizlilik Politikası sayfası
 ├── macos/                  # macOS platform sayfası
 ├── windows/                # Windows platform sayfası
 ├── linux/                  # Linux platform sayfası
@@ -35,6 +33,7 @@ Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegr
 ├── features/               # Özellikler sayfası
 ├── security/               # Güvenlik sayfası
 ├── pricing/                # Fiyatlandırma sayfası
+├── open-source/            # Açık Kaynak (Open Source) sayfası
 ├── docs/                   # Dokümantasyon sayfası
 ├── blog/                   # Blog sayfası
 ├── download/               # İndirme sayfası
