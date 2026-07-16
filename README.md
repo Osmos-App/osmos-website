@@ -1,54 +1,88 @@
 # Osmos Website
 
-This repository contains the marketing landing page and waitlist portal for **[Osmos](https://useosmos.com)**, a local-first version control system for designers, writers, and teams. 
+This repository contains the marketing website and waitlist portal for **[Osmos](https://useosmos.com)**, a local-first version control system designed around your operating system.
 
-The site is built with a premium, responsive glassmorphism UI, a native-feeling dark mode toggle, and a robust waitlist system powered by Firebase Hosting, Cloud Functions, and Firestore.
+The site is built as a highly optimized, multi-page product website utilizing a robust CSS design system, fluid typography, dark mode integration, and a Firebase-backed waitlist architecture.
 
 ---
 
-## Directory Layout
+## 🏗 Architecture & Stack
+
+- **Frontend Build Tool:** Vite
+- **Styling:** Vanilla CSS (TailwindCSS v4 for utility foundation) with a custom design token system (`globals.css`).
+- **Page Generation:** Custom Node.js scripts (`generate_*.js`) that dynamically compile the multi-page structure (macOS, Windows, Linux, Android, Features, Blog, etc.) using `index.html` as a template layout.
+- **Backend & Hosting:** Firebase Hosting, Cloud Functions (for the waitlist API), and Firestore.
+- **E2E Testing:** Python Playwright (`test_osmos.py`).
+
+---
+
+## 📂 Directory Layout
 
 ```text
 ├── src/
-│   ├── globals.css         # Styling system & Tailwind CSS setup
-│   └── main.js             # Client interactivity (Dark mode, waitlist form, animation)
+│   ├── globals.css         # Core styling system, design tokens, and CSS variables
+│   └── main.js             # Client interactivity (Dark mode, waitlist form, animation logic)
 ├── functions/
 │   ├── index.js            # Node.js Firebase Cloud Function (subscription, mail SMTP)
-│   ├── package.json        # Backend dependencies (nodemailer, firebase-admin)
-│   └── package-lock.json   # Backend locked dependency tree
-├── public/                 # Static landing page media and vector assets
-├── index.html              # Core HTML structure
+│   └── package.json        # Backend dependencies
+├── public/                 # Static media and vector assets
+├── index.html              # Core HTML structure / Template for generated pages
+├── generate_pages.js       # Script to generate generic pages (Features, Security, Blog, etc.)
+├── generate_macos.js       # Script to generate the macOS platform page
+├── generate_windows.js     # Script to generate the Windows platform page
+├── generate_linux.js       # Script to generate the Linux platform page
+├── generate_android.js     # Script to generate the Android platform page
 ├── vite.config.js          # Vite compilation config
 ├── firebase.json           # Firebase Hosting, Rewrites, Headers, and Emulator mapping
-├── firestore.rules         # Security rules protecting Firestore collection write/reads
-├── test_osmos.py           # Playwright E2E Python test suite for core UI features
+├── firestore.rules         # Security rules protecting Firestore collections
+├── test_osmos.py           # Playwright E2E Python test suite
 └── package.json            # Frontend dependency definitions and scripts
 ```
 
 ---
 
-## Getting Started
+## 🛠 Local Development
 
 ### Prerequisites
 
 - Node.js (v22+)
 - Firebase CLI (for emulator testing and manual deployment)
-- Python (with `playwright` package installed if running integration tests)
+- Python (with `playwright` installed for E2E tests)
 
-### Local Development
+### Running the Website
 
-1. Install local dependencies:
+1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the Vite development server:
+2. Generate the multi-page structure:
+   Whenever you make structural changes to platform pages or standard pages, you must run the generators:
+   ```bash
+   node generate_macos.js
+   node generate_windows.js
+   node generate_linux.js
+   node generate_android.js
+   node generate_pages.js
+   ```
+
+3. Start the Vite development server:
    ```bash
    npm run dev
    ```
    The site will be running at `http://localhost:5173`.
 
-### Firebase Emulators (Local Backend Testing)
+### Building for Production
+
+To compile and minify the site for production:
+```bash
+npm run build
+```
+This generates the optimized bundle in the `dist/` directory.
+
+---
+
+## 🧪 Firebase Emulators (Backend Testing)
 
 To test Firestore writes, Cloud Functions execution, and custom headers locally:
 
@@ -59,22 +93,9 @@ To test Firestore writes, Cloud Functions execution, and custom headers locally:
 
 2. Access the Emulator Suite at `http://localhost:4000` and the mock frontend endpoint at `http://localhost:5002`.
 
-### End-to-End Testing
-
-The project has a built-in E2E regression test suite verifying Dark Mode toggling and waitlist success flow using Playwright:
-
-```bash
-# Setup Python playwright dependencies
-pip install playwright
-playwright install
-
-# Run the test suite (requires local Vite server running)
-python test_osmos.py
-```
-
 ---
 
-## Waitlist API Reference
+## ⚙️ Waitlist API Reference
 
 ### POST `/api/subscribe`
 
@@ -96,19 +117,9 @@ Registers a new user to the Osmos waitlist and queues the welcome email sequence
 }
 ```
 
-#### Response (Validation Error - 400 Bad Request)
-```json
-{
-  "error": {
-    "code": "INVALID_EMAIL",
-    "message": "Please enter a valid email address."
-  }
-}
-```
-
 ---
 
-## CI/CD & Deployment
+## 🚀 CI/CD & Deployment
 
 Deployments are fully automated via GitHub Actions:
 
@@ -124,6 +135,6 @@ npx firebase-tools deploy --only hosting
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
