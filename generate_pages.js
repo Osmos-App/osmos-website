@@ -40,17 +40,6 @@ const pages = {
     'download/index.html': ['Download Osmos', 'Osmos is currently in closed alpha. Join the waitlist on the home page to get early access.']
 };
 
-const platforms = {
-    'windows/index.html': ['Windows', 'Native Windows support is on the roadmap. Osmos will use native Windows APIs to integrate deeply with File Explorer.'],
-    'linux/index.html': ['Linux', 'Linux support is coming soon. Osmos will support headless mode for servers and native integration for desktop environments.'],
-    'android/index.html': ['Android', 'Access your files anywhere on your local network with our upcoming Android client.']
-};
-
 for (const [path, [title, desc]] of Object.entries(pages)) {
     fs.writeFileSync(path, generatePlaceholder(title, desc));
 }
-
-for (const [path, [title, desc]] of Object.entries(platforms)) {
-    fs.writeFileSync(path, generatePlatformPlaceholder(title, desc));
-}
-
