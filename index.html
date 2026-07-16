@@ -44,8 +44,9 @@
         <span class="tag">Local-first version control</span>
       </div>
       <nav class="links">
-        <a href="#engine">Features</a>
-        <a href="#spec">Architecture</a>
+        <a href="#experience">Experience</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#spec">Spec</a>
         <a href="#roadmap">Roadmap</a>
         <a href="https://github.com/Osmos-App" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
@@ -73,17 +74,47 @@
 
   <section class="hero">
     <div class="wrap">
-      <div>
-        <p class="def rise d1">
-          <span class="w">osmos</span> — the gradual movement of a system toward a shared equilibrium.
-        </p>
-        <h1 class="display rise d2">Version control for the way you <em>actually</em> work.</h1>
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="hero-pre-headline rise d1">
+          <span class="forget-line">Forget <kbd class="mono">Ctrl + S</kbd>.</span>
+          <span class="forget-line">Forget <span class="mono">Final_v27.psd</span>.</span>
+          <span class="forget-line">Forget manual backups.</span>
+        </div>
+
+        <h1 class="display rise d2">
+          Version control<br>
+          for creators.
+        </h1>
+
         <p class="lede rise d3">
-          Osmos is a local-first version control system built for designers, writers, and teams. No cloud required. No
-          complex CLI commands. Just your files, versioned and synced across your devices — privately, locally, and
-          fast.
+          Osmos quietly remembers everything you do, automatically.<br>
+          No cloud storage limits, no fear of losing work.
         </p>
-        <div class="dev-status rise d4">
+        </div>
+
+        <div class="hero-right">
+          <div class="comparison rise d4">
+          <div class="comp-col before">
+            <span class="comp-lbl">BEFORE</span>
+            <div class="comp-files">
+              <span class="file">Logo.psd</span>
+              <span class="file">Logo_Final.psd</span>
+              <span class="file">Logo_Final_v2.psd</span>
+              <span class="file active">Logo_Final_v2_REAL.psd</span>
+            </div>
+          </div>
+          <div class="comp-arrow">→</div>
+          <div class="comp-col after">
+            <span class="comp-lbl">AFTER</span>
+            <div class="comp-files">
+              <span class="file active">Logo.psd</span>
+              <span class="file-meta">↳ 128 snapshots</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dev-status rise d5">
           <p class="status-line"><span class="dot"></span>In active development</p>
           <p class="status-note">
             Osmos is being built right now — the alpha isn't open yet. Follow the work as it happens
@@ -92,20 +123,48 @@
           </p>
         </div>
       </div>
+      </div>
 
-      <aside class="meta rise d5">
-        <div class="cap">System stack</div>
-        <div class="mrow"><span>ui</span><b>Tauri, React, TypeScript</b></div>
-        <div class="mrow"><span>core</span><b>Rust</b></div>
-        <div class="mrow"><span>discovery</span><b>mDNS</b></div>
-        <div class="mrow"><span>security</span><b>AES-GCM</b></div>
-      </aside>
     </div>
   </section>
 
-  <section class="figsec divider">
+    <section class="section divider" id="experience">
     <div class="wrap">
-      <figure class="fig reveal">
+      <header class="sec-head reveal">
+        <span class="kicker">§1 — The Experience</span>
+        <h2>Focus on the work, not the files.</h2>
+      </header>
+
+      <div class="grid3">
+        <article class="reveal s1">
+          <span class="idx">01</span>
+          <h3>Every version is already there.</h3>
+          <p>Every moment is remembered automatically. Revert a single file or your entire workspace instantly. If you make a mistake, simply step back in time.</p>
+        </article>
+
+        <article class="reveal s2">
+          <span class="idx">02</span>
+          <h3>Sync without the cloud.</h3>
+          <p>Work entirely offline. Osmos discovers your devices on the local network and syncs the moment you connect. No external servers involved.</p>
+        </article>
+
+        <article class="reveal s3">
+          <span class="idx">03</span>
+          <h3>Private by design.</h3>
+          <p>Your files belong to you. Everything is end-to-end encrypted before it moves. Total ownership, built in.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section divider" id="architecture">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="kicker">§2 — Architecture</span>
+        <h2>The technology matters. You shouldn't have to think about it.</h2>
+      </header>
+
+      <figure class="fig reveal s1">
         <div class="fig-head">
           <span class="no">Fig. 1</span><span class="tl">Peer-to-peer sync architecture</span>
         </div>
@@ -146,8 +205,8 @@
             <g>
               <circle class="d-node-ring pulse" cx="170" cy="118" r="15" style="animation-delay:0s"></circle>
               <circle class="d-node-core origin" cx="170" cy="118" r="7.5"></circle>
-              <text class="d-label" x="170" y="150" text-anchor="middle">MacBook (Hub)</text>
-              <text class="d-anno" x="170" y="92" text-anchor="middle" style="fill:var(--accent)">source of truth</text>
+              <text class="d-label" x="170" y="150" text-anchor="middle">MacBook</text>
+              <text class="d-anno" x="170" y="92" text-anchor="middle" style="fill:var(--accent)">active node</text>
             </g>
             <g>
               <circle class="d-node-ring pulse" cx="382" cy="92" r="15" style="animation-delay:.5s"></circle>
@@ -173,76 +232,25 @@
           </svg>
         </div>
         <figcaption>
-          When the hub is offline, clients queue their changes locally. The moment the hub comes back online, everything
-          syncs automatically over the local network. No external servers involved.
+          Devices queue their changes locally when offline. The moment they reconnect, everything syncs automatically peer-to-peer over your local network.
         </figcaption>
       </figure>
-    </div>
-  </section>
 
-  <section class="section divider" id="engine">
-    <div class="wrap">
-      <header class="sec-head reveal">
-        <span class="kicker">§1 — Principles</span>
-        <h2>Version control for everyone.</h2>
-      </header>
-
-      <div class="grid3">
-        <article class="reveal s1">
-          <span class="idx">01</span>
-          <span class="lbl">Versioning</span>
-          <h3>Snapshot-based</h3>
-          <p>Every save is a full snapshot, not a complex diff. Revert a single file or an entire commit instantly with
-            two-level rollback. Conflicts are automatically resolved by timestamp (LWW) via the central hub.</p>
-        </article>
-
-        <article class="reveal s2">
-          <span class="idx">02</span>
-          <span class="lbl">Networking</span>
-          <h3>Local & Offline</h3>
-          <p>Work without a connection and sync when ready. Osmos uses mDNS to discover devices on your local network.
-            Once reachable, your local queue syncs with the hub instantly. Completely offline-capable.</p>
-        </article>
-
-        <article class="reveal s3">
-          <span class="idx">03</span>
-          <span class="lbl">Security</span>
-          <h3>End-to-end encrypted</h3>
-          <p>Your files are encrypted with PBKDF2-derived keys that only you hold. Data is stored securely via AES-GCM
-            and transport is protected via the Noise Protocol. Total privacy by design.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="figsec divider">
-    <div class="wrap">
-      <header class="sec-head reveal">
-        <span class="kicker">§ Preview</span>
-        <h2>How it works.</h2>
-      </header>
-
-      <figure class="fig reveal">
+      <figure class="fig reveal s2" style="margin-top: clamp(40px, 6vw, 60px);">
         <div class="fig-head">
-          <span class="no">Fig. 2</span><span class="tl">Hub & Client Architecture Concept</span>
+          <span class="no">Fig. 2</span><span class="tl">Data Flow</span>
         </div>
         <div class="fig-body" style="padding:clamp(20px,3vw,34px) clamp(18px,3vw,34px);">
           <pre class="mono"
-            style="margin:0; font-size:clamp(.8rem,1.4vw,.94rem); line-height:1.85; color:var(--ink); overflow-x:auto;"><span style="color:var(--ink-3); font-style:italic">// One device acts as the central source of truth.</span>
-<span style="color:var(--accent)">Main Computer</span> (Hub)
-├── Receives changes from all clients
-├── Resolves conflicts by timestamp (LWW)
-├── Manages admin queue for pending diffs
-└── Serves as the source of truth
-
-<span style="color:var(--ink-3); font-style:italic">// All other devices act as read/write clients.</span>
-<span style="color:var(--accent)">Phones / Tablets / Laptops</span> (Clients)
-├── Track and version local changes
-├── Queue changes when hub is offline
-└── Sync automatically when hub is reachable</pre>
+            style="margin:0; font-size:clamp(.8rem,1.4vw,.94rem); line-height:1.85; color:var(--ink); overflow-x:auto;"><span style="color:var(--ink-3); font-style:italic">// Every node maintains its own local history.</span>
+<span style="color:var(--accent)">All Devices</span> (Peer-to-Peer)
+├── Track local changes invisibly
+├── Maintain a local history graph
+├── Resolve conflicts automatically
+└── Sync seamlessly when on the same network</pre>
         </div>
         <figcaption>
-          Intuitive GUI by default, with powerful CLI commands planned for the future. Everything is managed through a single, cross-platform Tauri interface built with React and TypeScript, providing native performance across Windows, macOS, and Linux.
+          Everything runs smoothly through a beautiful, cross-platform interface built with Tauri, React, and TypeScript.
         </figcaption>
       </figure>
     </div>
@@ -251,32 +259,36 @@
   <section class="section divider" id="spec">
     <div class="wrap">
       <header class="sec-head reveal">
-        <span class="kicker">§2 — Specification</span>
-        <h2>Technical overview.</h2>
+        <span class="kicker">§3 — Specification</span>
+        <h2>Built for permanence.</h2>
       </header>
 
       <dl class="spec">
         <div class="row reveal s1">
-          <dt>Interface</dt>
-          <dd>Tauri, React, TS <span class="q">· CLI planned</span></dd>
+          <dt>Core Engine</dt>
+          <dd>Rust <span class="q">· with optional gitoxide backend</span></dd>
         </div>
         <div class="row reveal s1">
+          <dt>Interface</dt>
+          <dd>Tauri, React, TS</dd>
+        </div>
+        <div class="row reveal s2">
           <dt>Architecture</dt>
-          <dd>Hub & Client <span class="q">· local-first, peer-to-peer</span></dd>
+          <dd>Decentralized <span class="q">· local-first, peer-to-peer</span></dd>
         </div>
         <div class="row reveal s2">
           <dt>Versioning</dt>
           <dd>Snapshots <span class="q">· two-level rollback</span></dd>
         </div>
-        <div class="row reveal s2">
+        <div class="row reveal s3">
           <dt>Conflict resolution</dt>
           <dd>Timestamp (LWW) <span class="q">· admin queue for pending changes</span></dd>
         </div>
         <div class="row reveal s3">
           <dt>Discovery</dt>
-          <dd>mDNS (_osmos._tcp.local) <span class="q">· on the local subnet</span></dd>
+          <dd>mDNS (_osmos._tcp.local)</dd>
         </div>
-        <div class="row reveal s3">
+        <div class="row reveal s4">
           <dt>Encryption</dt>
           <dd>AES-GCM via CryptoKit <span class="q">· Noise Protocol for transport</span></dd>
         </div>
@@ -284,13 +296,9 @@
           <dt>Recovery</dt>
           <dd>BIP-39 <span class="q">· 24-word recovery phrase</span></dd>
         </div>
-        <div class="row reveal s4">
-          <dt>Core Engine</dt>
-          <dd>Rust <span class="q">· with optional gitoxide backend</span></dd>
-        </div>
         <div class="row reveal s5">
           <dt>Platform</dt>
-          <dd>Windows, macOS, Linux <span class="q">· Cross-platform</span></dd>
+          <dd>Windows, macOS, Linux</dd>
         </div>
         <div class="row reveal s5">
           <dt>Status</dt>
@@ -303,37 +311,41 @@
   <section class="section divider" id="roadmap">
     <div class="wrap">
       <header class="sec-head reveal">
-        <span class="kicker">§3 — Roadmap</span>
-        <h2>What's next for Osmos.</h2>
+        <span class="kicker">§4 — Roadmap</span>
+        <h2>What's next.</h2>
       </header>
 
-      <div class="grid3">
-        <article class=" reveal s1">
+      <div class="grid4">
+        <article class="reveal s1">
           <span class="idx">Phase 1</span>
-          <span class="lbl" style="color: var(--primary);">Current</span>
-          <h3>Core & macOS Alpha</h3>
-          <p>Stabilizing the Rust engine, mDNS peer discovery, and LWW conflict resolution. Releasing the initial Hub &
-            Cross-platform desktop interface built with Tauri and React.</p>
+          <span class="lbl" style="color: var(--primary);">Desktop Alpha (Current)</span>
+          <h3>macOS, Windows & Linux</h3>
+          <p>Releasing the initial cross-platform desktop application.</p>
         </article>
 
         <article class="reveal s2">
           <span class="idx">Phase 2</span>
-          <span class="lbl">In Development</span>
-          <h3>Cross-Platform Beta</h3>
-          <p>A unified desktop client built on Tauri, delivering a seamless experience across all major platforms. Rolling
-          out in late 2024.</p>
+          <span class="lbl">Peer-to-peer Sync</span>
+          <h3>Local Network</h3>
+          <p>Seamlessly sync your history across all your devices on the local network without relying on cloud servers.</p>
         </article>
 
         <article class="reveal s3">
           <span class="idx">Phase 3</span>
-          <span class="lbl">Planned</span>
-          <h3>Git Interop & v1.0</h3>
-          <p>Integrating the optional <code>gitoxide</code> backend for seamless import/export to legacy Git
-            repositories. Finalizing admin queue workflows and security audits for the 1.0 release.</p>
+          <span class="lbl">Mobile</span>
+          <h3>iOS & Android</h3>
+          <p>Clients for iOS and Android, allowing you to access and sync your history anywhere on your local network.</p>
+        </article>
+
+        <article class="reveal s4">
+          <span class="idx">Phase 4</span>
+          <span class="lbl">Git Interoperability (v1.0)</span>
+          <h3>Collaboration</h3>
+          <p>Seamless import/export to legacy Git repositories for collaboration with developers.</p>
         </article>
       </div>
 
-      <div class="close reveal s4">
+      <div class="close reveal s5">
         <div class="actions">
           <a class="btn" href="https://github.com/Osmos-App" target="_blank" rel="noopener noreferrer">View on GitHub</a>
           <a class="textlink" href="#spec">Review the spec</a>
@@ -341,6 +353,7 @@
       </div>
     </div>
   </section>
+
 
   <footer>
     <div class="wrap">
