@@ -6,17 +6,25 @@ The site is built as a highly optimized, multi-page product website utilizing a 
 
 ---
 
-## 🏗 Architecture & Stack
+*(Türkçe Çeviri)*
+# Osmos Web Sitesi
+
+Bu depo, işletim sisteminize özel tasarlanmış yerel öncelikli sürüm kontrol sistemi olan **[Osmos](https://useosmos.com)** için hazırlanan pazarlama web sitesini ve bekleme listesi portalını içermektedir.
+
+Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegrasyonu ve Firebase destekli bekleme listesi mimarisi kullanılarak yüksek oranda optimize edilmiş, çok sayfalı bir ürün web sitesi olarak inşa edilmiştir.
+
+---
+
+## 🏗 Architecture & Stack (Mimari ve Teknolojiler)
 
 - **Frontend Build Tool:** Vite
 - **Styling:** Vanilla CSS (TailwindCSS v4 for utility foundation) with a custom design token system (`globals.css`).
-- **Page Generation:** Custom Node.js scripts (`generate_*.js`) that dynamically compile the multi-page structure (macOS, Windows, Linux, Android, Features, Blog, etc.) using `index.html` as a template layout.
-- **Backend & Hosting:** Firebase Hosting, Cloud Functions (for the waitlist API), and Firestore.
+- **Backend & Hosting:** Firebase Hosting, Cloud Functions, and Firestore.
 - **E2E Testing:** Python Playwright (`test_osmos.py`).
 
 ---
 
-## 📂 Directory Layout
+## 📂 Directory Layout (Dizin Yapısı)
 
 ```text
 ├── src/
@@ -26,12 +34,17 @@ The site is built as a highly optimized, multi-page product website utilizing a 
 │   ├── index.js            # Node.js Firebase Cloud Function (subscription, mail SMTP)
 │   └── package.json        # Backend dependencies
 ├── public/                 # Static media and vector assets
-├── index.html              # Core HTML structure / Template for generated pages
-├── generate_pages.js       # Script to generate generic pages (Features, Security, Blog, etc.)
-├── generate_macos.js       # Script to generate the macOS platform page
-├── generate_windows.js     # Script to generate the Windows platform page
-├── generate_linux.js       # Script to generate the Linux platform page
-├── generate_android.js     # Script to generate the Android platform page
+├── index.html              # Core HTML structure (Home)
+├── macos/                  # macOS platform page
+├── windows/                # Windows platform page
+├── linux/                  # Linux platform page
+├── android/                # Android platform page
+├── features/               # Features page
+├── security/               # Security page
+├── pricing/                # Pricing page
+├── docs/                   # Documentation page
+├── blog/                   # Blog page
+├── download/               # Download page
 ├── vite.config.js          # Vite compilation config
 ├── firebase.json           # Firebase Hosting, Rewrites, Headers, and Emulator mapping
 ├── firestore.rules         # Security rules protecting Firestore collections
@@ -41,38 +54,28 @@ The site is built as a highly optimized, multi-page product website utilizing a 
 
 ---
 
-## 🛠 Local Development
+## 🛠 Local Development (Yerel Geliştirme)
 
-### Prerequisites
+### Prerequisites (Ön Koşullar)
 
 - Node.js (v22+)
 - Firebase CLI (for emulator testing and manual deployment)
 - Python (with `playwright` installed for E2E tests)
 
-### Running the Website
+### Running the Website (Siteyi Çalıştırma)
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Generate the multi-page structure:
-   Whenever you make structural changes to platform pages or standard pages, you must run the generators:
-   ```bash
-   node generate_macos.js
-   node generate_windows.js
-   node generate_linux.js
-   node generate_android.js
-   node generate_pages.js
-   ```
-
-3. Start the Vite development server:
+2. Start the Vite development server:
    ```bash
    npm run dev
    ```
    The site will be running at `http://localhost:5173`.
 
-### Building for Production
+### Building for Production (Üretime Hazırlama)
 
 To compile and minify the site for production:
 ```bash
@@ -95,31 +98,7 @@ To test Firestore writes, Cloud Functions execution, and custom headers locally:
 
 ---
 
-## ⚙️ Waitlist API Reference
-
-### POST `/api/subscribe`
-
-Registers a new user to the Osmos waitlist and queues the welcome email sequence.
-
-#### Request Payload
-```json
-{
-  "email": "developer@useosmos.com",
-  "consent": true
-}
-```
-
-#### Response (Success - 200 OK)
-```json
-{
-  "success": true,
-  "message": "Subscribed successfully"
-}
-```
-
----
-
-## 🚀 CI/CD & Deployment
+## 🚀 CI/CD & Deployment (Sürekli Entegrasyon ve Dağıtım)
 
 Deployments are fully automated via GitHub Actions:
 
@@ -135,6 +114,6 @@ npx firebase-tools deploy --only hosting
 
 ---
 
-## 📄 License
+## 📄 License (Lisans)
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
