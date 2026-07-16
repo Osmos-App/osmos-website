@@ -38,7 +38,7 @@ for (const [path, [title, desc]] of Object.entries(pages)) {
 // Generate macOS template
 const macosContent = `${head}
     <section class="hero">
-        <div class="wrap">
+        <div class="wrap" style="max-width: none;">
             <div class="hero-content" style="grid-template-columns: 1fr; gap: 40px; text-align: center;">
                 <div>
                     <h1 class="display">Designed around macOS.</h1>
