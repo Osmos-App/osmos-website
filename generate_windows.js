@@ -1,85 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+const fs = require('fs');
+const indexHtml = fs.readFileSync('index.html', 'utf-8');
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Osmos — Local-First Peer-to-Peer Version Control System</title>
-  <link rel="canonical" href="https://useosmos.com/" />
-  <meta name="description"
-    content="Osmos is a local-first, peer-to-peer version control system for designers, writers, and teams. Version and sync your files privately, locally, and fast." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/src/globals.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Osmos",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "macOS, iOS, Android, Windows, Linux",
-    "description": "Osmos is a local-first, peer-to-peer version control system for designers, writers, and teams. Version and sync your files privately, locally, and fast.",
-    "softwareVersion": "0.1.0-alpha",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
-</head>
+const headMatch = indexHtml.match(/([\s\S]*?)<section class="hero">/);
+const footerMatch = indexHtml.match(/(<footer>[\s\S]*?<\/html>)/);
 
-<body>
+const head = headMatch[1];
+const footer = footerMatch[1];
 
-  <div class="grain"></div>
-  <div class="frame"><i></i></div>
-
-  <header class="masthead">
-    <div class="wrap">
-      <div class="brand">
-        <a href="/" class="brand-link">
-          <span class="mark">Osmos</span>
-        </a>
-        <span class="tag">Local-first version control</span>
-      </div>
-      <div class="masthead-right" style="display: flex; align-items: center; gap: 24px;">
-        <nav class="links">
-          <div class="dropdown-wrapper">
-            <a href="/macos/" class="dropdown-trigger">Platforms</a>
-            <div class="dropdown-menu">
-              <a href="/macos/">macOS</a>
-              <a href="/windows/">Windows</a>
-              <a href="/linux/">Linux</a>
-              <a href="/android/">Android</a>
-            </div>
-          </div>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
+const windowsContent = `${head}
   <section class="hero" style="padding-top: clamp(60px, 12vh, 140px); padding-bottom: clamp(60px, 10vh, 120px);">
     <div class="wrap" style="text-align: center; margin: 0 auto;">
       <span class="kicker" style="justify-content: center; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px;">Built for Windows <span style="background: var(--ink-3); color: var(--paper); font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; line-height: 1; letter-spacing: 0.05em;">PLANNED</span></span>
@@ -101,11 +29,11 @@
             <div class="cap">Filesystem Activity</div>
             <div class="p-4" style="padding: 24px; font-family: var(--mono); font-size: 0.85rem; color: var(--ink-2); line-height: 1.8;">
               <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 8px;">
-                <span style="color: var(--ink);">C:\Projects\Logo.psd</span>
+                <span style="color: var(--ink);">C:\\Projects\\Logo.psd</span>
                 <span style="color: var(--accent);">Modified</span>
               </div>
               <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 8px;">
-                <span style="color: var(--ink);">C:\Projects\Assets\bg.png</span>
+                <span style="color: var(--ink);">C:\\Projects\\Assets\\bg.png</span>
                 <span style="color: var(--accent);">Added</span>
               </div>
               <div style="display: flex; justify-content: space-between;">
@@ -190,24 +118,6 @@
       </div>
     </div>
   </section>
-<footer>
-    <div class="wrap" style="max-width: none;">
-      <div class="colo">
-        <svg class="node-mark" width="34" height="14" viewBox="0 0 34 14" aria-hidden="true">
-          <line x1="4" y1="7" x2="17" y2="3" stroke="var(--rule-2)"></line>
-          <line x1="17" y1="3" x2="30" y2="10" stroke="var(--rule-2)"></line>
-          <line x1="4" y1="7" x2="30" y2="10" stroke="var(--rule-2)"></line>
-          <circle cx="4" cy="7" r="3" fill="var(--accent)"></circle>
-          <circle cx="17" cy="3" r="2.6" fill="none" stroke="var(--ink-3)"></circle>
-          <circle cx="30" cy="10" r="2.6" fill="none" stroke="var(--ink-3)"></circle>
-        </svg>
-        <span>Osmos — local-first version control</span>
-      </div>
-      <div>Set in Newsreader &amp; DM Mono · © <span id="yr">2026</span></div>
-    </div>
-  </footer>
+${footer}`;
 
-  <script type="module" src="/src/main.js"></script>
-</body>
-
-</html>
+fs.writeFileSync('windows/index.html', windowsContent);
