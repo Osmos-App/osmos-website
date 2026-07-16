@@ -22,7 +22,7 @@ const macosContent = `${head}
         <div class="hero-left">
           <span class="kicker">Native Integration</span>
           <h2 class="display" style="font-size: clamp(2rem, 5vw, 3.2rem); margin: 16px 0 24px;">Respects your filesystem.</h2>
-          <p class="desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-2);">Changes are detected instantly using native macOS technologies. No polling, no battery drain. It just works with the folders you already have.</p>
+          <p class="desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-2);">Changes are detected instantly without slowing down your Mac. No polling, no battery drain. It just works with the folders you already have.</p>
         </div>
         <div class="hero-right">
           <div class="meta" style="width: 100%;">
@@ -50,7 +50,7 @@ const macosContent = `${head}
   <section class="section" id="finder" style="border-top: 1px solid var(--rule);">
     <div class="wrap">
       <div class="sec-head">
-        <span class="kicker">Finder Experience</span>
+        <span class="kicker" style="display: inline-flex; align-items: center; gap: 8px;">Finder Experience <span style="background: var(--ink-3); color: var(--paper); font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; line-height: 1; letter-spacing: 0.05em;">PLANNED</span></span>
         <h2 style="font-size: clamp(2rem, 5vw, 3.2rem); margin: 16px 0 24px;">Works where you work.</h2>
         <p class="desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-2);">Browse your history directly from Finder. Revert changes, view past versions, and restore deleted files without ever opening a terminal.</p>
       </div>
@@ -60,7 +60,7 @@ const macosContent = `${head}
           <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
           <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
           <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
-          <span style="margin-left: 12px;">Finder Extension</span>
+          <span style="margin-left: 12px; display: inline-flex; align-items: center; gap: 8px;">Finder Extension <span style="background: var(--ink-3); color: var(--paper); font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; line-height: 1; letter-spacing: 0.05em;">PLANNED</span></span>
         </div>
         <div style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
           <div style="background: var(--paper); padding: 16px; border-radius: 6px; border: 1px solid var(--rule);">
