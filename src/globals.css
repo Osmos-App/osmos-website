@@ -1343,3 +1343,45 @@ html.theme-transition::view-transition-new(root) {
     }
 }
 
+
+/* dropdown navigation */
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 140px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dropdown-wrapper:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-menu a {
+    padding: 8px 16px;
+    display: block;
+    color: var(--ink-2);
+}
+
+.dropdown-menu a:hover {
+    color: var(--ink);
+    background: var(--paper);
+}
+
+.brand-link {
+    text-decoration: none;
+    color: inherit;
+}
