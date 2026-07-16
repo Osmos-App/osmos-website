@@ -4,18 +4,11 @@ This repository contains the marketing website and waitlist portal for **[Osmos]
 
 The site is built as a highly optimized, multi-page product website utilizing a robust CSS design system, fluid typography, dark mode integration, and a Firebase-backed waitlist architecture.
 
----
-
-*(Türkçe Çeviri)*
-# Osmos Web Sitesi
-
-Bu depo, işletim sisteminize özel tasarlanmış yerel öncelikli sürüm kontrol sistemi olan **[Osmos](https://useosmos.com)** için hazırlanan pazarlama web sitesini ve bekleme listesi portalını içermektedir.
-
-Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegrasyonu ve Firebase destekli bekleme listesi mimarisi kullanılarak yüksek oranda optimize edilmiş, çok sayfalı bir ürün web sitesi olarak inşa edilmiştir.
+> 🇹🇷 [Türkçe dokümantasyon için tıklayın](README.tr.md)
 
 ---
 
-## 🏗 Architecture & Stack (Mimari ve Teknolojiler)
+## 🏗 Architecture & Stack
 
 - **Frontend Build Tool:** Vite
 - **Styling:** Vanilla CSS (TailwindCSS v4 for utility foundation) with a custom design token system (`globals.css`).
@@ -24,7 +17,7 @@ Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegr
 
 ---
 
-## 📂 Directory Layout (Dizin Yapısı)
+## 📂 Directory Layout
 
 ```text
 ├── src/
@@ -54,15 +47,15 @@ Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegr
 
 ---
 
-## 🛠 Local Development (Yerel Geliştirme)
+## 🛠 Local Development
 
-### Prerequisites (Ön Koşullar)
+### Prerequisites
 
 - Node.js (v22+)
 - Firebase CLI (for emulator testing and manual deployment)
 - Python (with `playwright` installed for E2E tests)
 
-### Running the Website (Siteyi Çalıştırma)
+### Running the Website
 
 1. Install dependencies:
    ```bash
@@ -75,7 +68,7 @@ Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegr
    ```
    The site will be running at `http://localhost:5173`.
 
-### Building for Production (Üretime Hazırlama)
+### Building for Production
 
 To compile and minify the site for production:
 ```bash
@@ -98,7 +91,7 @@ To test Firestore writes, Cloud Functions execution, and custom headers locally:
 
 ---
 
-## 🚀 CI/CD & Deployment (Sürekli Entegrasyon ve Dağıtım)
+## 🚀 CI/CD & Deployment
 
 Deployments are fully automated via GitHub Actions:
 
@@ -114,6 +107,6 @@ npx firebase-tools deploy --only hosting
 
 ---
 
-## 📄 License (Lisans)
+## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
