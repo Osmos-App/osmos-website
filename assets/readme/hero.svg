@@ -1,27 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="350" viewBox="0 0 1200 350" role="img" aria-labelledby="title desc">
-  <title id="title">Osmos Website</title>
-  <desc id="desc">The product website for Osmos, with a paper-like editorial visual system and a local-first version-control story.</desc>
-  <rect width="1200" height="350" rx="26" fill="#f4f5f3"/>
-  <rect x="1" y="1" width="1198" height="348" rx="25" fill="none" stroke="#cbd3d0"/>
-  <path d="M48 68H1152M48 282H1152" stroke="#c6cfcc"/>
-  <text x="58" y="47" fill="#50736d" font-family="ui-monospace, monospace" font-size="14" letter-spacing="2">PRODUCT SITE / VITE + VANILLA CSS + FIREBASE</text>
-  <text x="58" y="118" fill="#1b1d1c" font-family="Georgia, serif" font-size="58" font-weight="600">Osmos Website</text>
-  <text x="58" y="160" fill="#4d5d59" font-family="Georgia, serif" font-size="22">The home for Osmos: local-first version control for creative work.</text>
-  <g transform="translate(58 204)" fill="none" stroke="#0d6f66" stroke-width="2">
-    <path d="M0 24H96M126 24H222M252 24H348"/>
-    <circle cx="111" cy="24" r="14" fill="#f4f5f3"/><circle cx="111" cy="24" r="5" fill="#0d6f66"/>
-    <circle cx="237" cy="24" r="14" fill="#f4f5f3"/><circle cx="237" cy="24" r="5" fill="#0d6f66"/>
-    <text x="0" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">STORY</text>
-    <text x="126" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">WAITLIST</text>
-    <text x="252" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">PLATFORMS</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="t d">
+  <title id="t">Osmos Website</title>
+  <desc id="d">The product site and waitlist for Osmos — a local-first version-control system that keeps a content-addressed history beside your working files.</desc>
+
+  <!-- paper document -->
+  <rect width="1200" height="360" rx="26" fill="#f4f5f3"/>
+  <rect x="1" y="1" width="1198" height="358" rx="25" fill="none" stroke="#cbd3d0"/>
+  <path d="M56 70H1144M56 300H1144" stroke="#c6cfcc" stroke-width="1"/>
+
+  <!-- masthead -->
+  <text x="56" y="48" fill="#0d6f66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="3">LOCAL-FIRST VERSION CONTROL</text>
+  <text x="1144" y="48" text-anchor="end" fill="#8a968f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2">OSMOS-APP / OSMOS-WEBSITE</text>
+
+  <!-- title block -->
+  <text x="56" y="152" fill="#1b1d1c" font-family="Georgia, 'Times New Roman', serif" font-size="60" font-weight="600">Osmos Website</text>
+  <text x="58" y="196" fill="#4d5d59" font-family="Georgia, 'Times New Roman', serif" font-size="21">The product site &amp; waitlist for Osmos — local-first version</text>
+  <text x="58" y="224" fill="#4d5d59" font-family="Georgia, 'Times New Roman', serif" font-size="21">control that keeps your history beside the files you create.</text>
+  <text x="58" y="272" fill="#52736c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="1.5">VITE · TAILWIND v4 · FIREBASE · MULTI-PAGE · THEME-AWARE</text>
+
+  <!-- motif: working folder -> content-addressed local history -> restore -->
+  <g transform="translate(792 104)">
+    <text x="0" y="-14" fill="#8a968f" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="1.5">.osmos/ — HISTORY BESIDE YOUR WORK</text>
+
+    <!-- working folder card -->
+    <g>
+      <path d="M4 20h44l10 12h58v70a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z" fill="#fafaf9" stroke="#c3ccc8"/>
+      <path d="M20 58h72M20 72h72M20 86h48" stroke="#c9d2ce" stroke-width="3" stroke-linecap="round"/>
+      <text x="58" y="128" text-anchor="middle" fill="#52736c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" letter-spacing="1">working folder</text>
+    </g>
+
+    <!-- connector -->
+    <path d="M120 64H166" fill="none" stroke="#0d6f66" stroke-width="1.6"/>
+    <path d="M160 59l7 5-7 5" fill="none" stroke="#0d6f66" stroke-width="1.6"/>
+
+    <!-- commit spine: older -> newer -->
+    <path d="M182 64H356" fill="none" stroke="#bcc6c2" stroke-width="1.6"/>
+
+    <!-- node: older -->
+    <circle cx="188" cy="64" r="8" fill="#f4f5f3" stroke="#0d6f66" stroke-width="2"/>
+    <text x="188" y="92" text-anchor="middle" fill="#8a968f" font-family="ui-monospace, monospace" font-size="10">e08d</text>
+
+    <!-- node: restore point (highlighted) -->
+    <circle cx="244" cy="64" r="13" fill="#f4f5f3" stroke="#0d6f66" stroke-width="2"/>
+    <circle cx="244" cy="64" r="11" fill="none" stroke="#0d6f66" stroke-width="1" opacity="0.4"/>
+    <circle cx="244" cy="64" r="4.5" fill="#0d6f66"/>
+    <text x="244" y="94" text-anchor="middle" fill="#0d6f66" font-family="ui-monospace, monospace" font-size="10" font-weight="600">7f3a &#8617;</text>
+
+    <!-- node -->
+    <circle cx="300" cy="64" r="8" fill="#f4f5f3" stroke="#0d6f66" stroke-width="2"/>
+    <text x="300" y="92" text-anchor="middle" fill="#8a968f" font-family="ui-monospace, monospace" font-size="10">c19b</text>
+
+    <!-- node: now -->
+    <circle cx="356" cy="64" r="9" fill="#0d6f66"/>
+    <text x="356" y="92" text-anchor="middle" fill="#4d5d59" font-family="ui-monospace, monospace" font-size="10" font-weight="600">a1b2 now</text>
+
+    <text x="0" y="150" fill="#52736c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.5">content-addressed &#183; BLAKE3 &#183; restore any earlier version</text>
   </g>
-  <g transform="translate(874 91)">
-    <rect width="266" height="153" rx="10" fill="#fafaf9" stroke="#b9c6c2"/>
-    <text x="22" y="31" fill="#0d6f66" font-family="Georgia, serif" font-size="24">Osmos</text>
-    <path d="M22 49H244" stroke="#d7dfdc"/>
-    <text x="22" y="82" fill="#24302d" font-family="Georgia, serif" font-size="17">Version control</text>
-    <text x="22" y="105" fill="#24302d" font-family="Georgia, serif" font-size="17">for creators.</text>
-    <rect x="22" y="120" width="92" height="18" rx="9" fill="#0d6f66"/>
-  </g>
-  <text x="58" y="316" fill="#6b7975" font-family="ui-monospace, monospace" font-size="13" letter-spacing="1">LIGHT / DARK THEME · RESPONSIVE MULTI-PAGE SITE · FIREBASE WAITLIST</text>
 </svg>
