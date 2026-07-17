@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="350" viewBox="0 0 1200 350" role="img" aria-labelledby="title desc">
+  <title id="title">Osmos Website</title>
+  <desc id="desc">The product website for Osmos, with a paper-like editorial visual system and a local-first version-control story.</desc>
+  <rect width="1200" height="350" rx="26" fill="#f4f5f3"/>
+  <rect x="1" y="1" width="1198" height="348" rx="25" fill="none" stroke="#cbd3d0"/>
+  <path d="M48 68H1152M48 282H1152" stroke="#c6cfcc"/>
+  <text x="58" y="47" fill="#50736d" font-family="ui-monospace, monospace" font-size="14" letter-spacing="2">PRODUCT SITE / VITE + VANILLA CSS + FIREBASE</text>
+  <text x="58" y="118" fill="#1b1d1c" font-family="Georgia, serif" font-size="58" font-weight="600">Osmos Website</text>
+  <text x="58" y="160" fill="#4d5d59" font-family="Georgia, serif" font-size="22">The home for Osmos: local-first version control for creative work.</text>
+  <g transform="translate(58 204)" fill="none" stroke="#0d6f66" stroke-width="2">
+    <path d="M0 24H96M126 24H222M252 24H348"/>
+    <circle cx="111" cy="24" r="14" fill="#f4f5f3"/><circle cx="111" cy="24" r="5" fill="#0d6f66"/>
+    <circle cx="237" cy="24" r="14" fill="#f4f5f3"/><circle cx="237" cy="24" r="5" fill="#0d6f66"/>
+    <text x="0" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">STORY</text>
+    <text x="126" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">WAITLIST</text>
+    <text x="252" y="61" fill="#52736c" stroke="none" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1">PLATFORMS</text>
+  </g>
+  <g transform="translate(874 91)">
+    <rect width="266" height="153" rx="10" fill="#fafaf9" stroke="#b9c6c2"/>
+    <text x="22" y="31" fill="#0d6f66" font-family="Georgia, serif" font-size="24">Osmos</text>
+    <path d="M22 49H244" stroke="#d7dfdc"/>
+    <text x="22" y="82" fill="#24302d" font-family="Georgia, serif" font-size="17">Version control</text>
+    <text x="22" y="105" fill="#24302d" font-family="Georgia, serif" font-size="17">for creators.</text>
+    <rect x="22" y="120" width="92" height="18" rx="9" fill="#0d6f66"/>
+  </g>
+  <text x="58" y="316" fill="#6b7975" font-family="ui-monospace, monospace" font-size="13" letter-spacing="1">LIGHT / DARK THEME · RESPONSIVE MULTI-PAGE SITE · FIREBASE WAITLIST</text>
+</svg>
