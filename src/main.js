@@ -14,15 +14,26 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-logEvent(analytics, 'app_initialized', {
-  version: '0.1.0-alpha',
-  platform: 'web',
-  timestamp: new Date().toISOString()
-});
+const initAnalytics = () => {
+  try {
+    const analytics = getAnalytics(app);
+    logEvent(analytics, 'app_initialized', {
+      version: '0.1.0-alpha',
+      platform: 'web',
+      timestamp: new Date().toISOString()
+    });
+    console.log("Osmos: Analytics & Core system initialized.");
+  } catch (e) {
+    console.warn("Osmos: Analytics initialization deferred/skipped:", e);
+  }
+};
 
-console.log("Osmos: Core system initialized successfully.");
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initAnalytics);
+} else {
+  setTimeout(initAnalytics, 1500);
+}
 
 // current year
 const yrElement = document.getElementById('yr');
