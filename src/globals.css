@@ -30,8 +30,8 @@
     --paper: var(--bg);
     --paper-2: var(--surface);
     --ink: var(--text);
-    --ink-2: color-mix(in srgb, var(--text) 60%, transparent);
-    --ink-3: color-mix(in srgb, var(--text) 42%, transparent);
+    --ink-2: color-mix(in srgb, var(--text) 74%, transparent);
+    --ink-3: color-mix(in srgb, var(--text) 62%, transparent);
     --rule: var(--border);
     --rule-2: color-mix(in srgb, var(--text) 16%, transparent);
     --accent: var(--primary);
