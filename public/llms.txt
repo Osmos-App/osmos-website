@@ -2,13 +2,18 @@
 
 > Osmos is a local-first, peer-to-peer version control system designed for designers, writers, and teams to privately, locally, and rapidly version and sync files. Operating entirely without central cloud servers, Osmos guarantees complete data ownership, privacy, and immediate local performance.
 
-## Key Information & Links
+Osmos replaces central cloud repositories with direct peer-to-peer syncing across local networks, providing real-time version history, automatic backups, and seamless Git interoperability.
 
-- [Osmos Homepage](https://useosmos.com/): Official website and features overview.
-- [GitHub Repository](https://github.com/Osmos-App): Source code, issues, and contributions.
-- [Documentation](https://useosmos.com/docs/): Technical specification and user guides.
-- [Download](https://useosmos.com/download/): Platform releases for macOS, Windows, Linux, and Android.
-- [Security Model](https://useosmos.com/security/): End-to-end encryption, local storage, and P2P synchronization architecture.
-- [Open Source](https://useosmos.com/open-source/): Licensing and open-source principles.
-- [Pricing](https://useosmos.com/pricing/): Open-source core and pricing details.
-- [Privacy Notice](https://useosmos.com/privacy): Data handling and privacy policy.
+## Overview
+
+- [Osmos Homepage](https://useosmos.com/): Official website and product overview
+- [Documentation](https://useosmos.com/docs/): Technical specification, architecture, and user guides
+- [Download](https://useosmos.com/download/): Platform releases for macOS, Windows, Linux, and Android
+- [Security Model](https://useosmos.com/security/): Peer-to-peer encryption, local storage, and security architecture
+- [Open Source](https://useosmos.com/open-source/): Open-source core licensing and community guidelines
+
+## Optional
+
+- [GitHub Repository](https://github.com/Osmos-App): Source code repositories and issue tracker
+- [Pricing](https://useosmos.com/pricing/): Free open-source core details and pricing information
+- [Privacy Notice](https://useosmos.com/privacy): Data handling, security, and privacy policy
