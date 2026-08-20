@@ -1,6 +1,8 @@
 # Osmos Web Sitesi
 
-Bu depo, işletim sisteminize özel tasarlanmış yerel öncelikli sürüm kontrol sistemi olan **[Osmos](https://useosmos.com)** için hazırlanan pazarlama web sitesini ve bekleme listesi portalını içermektedir.
+[🇬🇧 English](README.md) · [🇹🇷 Türkçe](README.tr.md)
+
+Bu depo, işletim sisteminize özel tasarlanmış yerel öncelikli sürüm kontrol sistemi olan **[Osmos](https://useosmos.com)** için hazırlanan ürün web sitesini ve bekleme listesi portalını içermektedir.
 
 Site; güçlü bir CSS tasarım sistemi, akıcı tipografi, karanlık mod entegrasyonu ve Firebase destekli bekleme listesi mimarisi kullanılarak yüksek oranda optimize edilmiş, çok sayfalı bir ürün web sitesi olarak inşa edilmiştir.
 
