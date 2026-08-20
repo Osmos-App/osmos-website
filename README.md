@@ -9,6 +9,8 @@
   &nbsp;·&nbsp;
   <a href="https://github.com/Osmos-App/osmos-ts">Desktop app</a>
   &nbsp;·&nbsp;
+  <a href="README.md">🇬🇧 English</a>
+  &nbsp;·&nbsp;
   <a href="README.tr.md">🇹🇷 Türkçe</a>
 </p>
 
